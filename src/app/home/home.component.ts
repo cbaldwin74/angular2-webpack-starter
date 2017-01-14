@@ -6,6 +6,8 @@ import {
 import { AppState } from '../app.service';
 import { Title } from './title';
 import { XLargeDirective } from './x-large';
+import { TestApiService } from '../test-api.service';
+import { Response } from '@angular/http';
 
 @Component({
   // The selector is what angular internally uses
@@ -24,10 +26,13 @@ import { XLargeDirective } from './x-large';
 export class HomeComponent implements OnInit {
   // Set our default values
   public localState = { value: '' };
+  public buttonLabel = 'Server Test';
+
   // TypeScript public modifiers
   constructor(
     public appState: AppState,
-    public title: Title
+    public title: Title,
+    private testApiService: TestApiService
   ) {}
 
   public ngOnInit() {
@@ -39,5 +44,10 @@ export class HomeComponent implements OnInit {
     console.log('submitState', value);
     this.appState.set('value', value);
     this.localState.value = '';
+  }
+
+  public testServer() {
+      console.log('testServer');
+      this.testApiService.testServer().subscribe((res: Response) => this.buttonLabel = res.text());
   }
 }

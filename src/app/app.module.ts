@@ -28,6 +28,7 @@ import { HomeComponent } from './home';
 import { AboutComponent } from './about';
 import { NoContentComponent } from './no-content';
 import { XLargeDirective } from './home/x-large';
+import { TestApiService } from './test-api.service';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
@@ -35,7 +36,8 @@ import '../styles/headings.css';
 // Application wide providers
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
-  AppState
+  AppState,
+  TestApiService
 ];
 
 type StoreType = {
