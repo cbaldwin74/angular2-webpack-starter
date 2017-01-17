@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="center-block">
+      <form (ngSubmit)="signup(localState.firstname, localState.lastname, localState.email, localState.password)" autocomplete="off">
+        <div class="form-group">
+          <label for="firstname">First Name</label>
+          <input
+            class="form-control"
+            id="firstname"
+            [value]="localState.firstname"
+            (input)="localState.firstname = $event.target.value"
+            placeholder="First Name"
+            autofocus>
+        </div>
+
+        <div class="form-group">
+          <label for="lastname">Last Name</label>
+          <input
+            class="form-control"
+            id="lastname"
+            [value]="localState.lastname"
+            (input)="localState.lastname = $event.target.value"
+            placeholder="Last Name">
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            class="form-control"
+            id="email"
+            [value]="localState.email"
+            (input)="localState.email = $event.target.value"
+            placeholder="Username">
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            class="form-control"
+            id="password"
+            [value]="localState.password"
+            (input)="localState.password = $event.target.value"
+            placeholder="Password">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+      </form>
+    </div>
+  </div>
+</div>

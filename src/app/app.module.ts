@@ -29,6 +29,9 @@ import { AboutComponent } from './about';
 import { NoContentComponent } from './no-content';
 import { XLargeDirective } from './home/x-large';
 import { TestApiService } from './test-api.service';
+import { LoginComponent } from './login';
+import { AuthService } from './auth.service';
+import { SignupComponent } from './signup';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
@@ -37,7 +40,8 @@ import '../styles/headings.css';
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
   AppState,
-  TestApiService
+  TestApiService,
+  AuthService
 ];
 
 type StoreType = {
@@ -56,7 +60,9 @@ type StoreType = {
     AboutComponent,
     HomeComponent,
     NoContentComponent,
-    XLargeDirective
+    XLargeDirective,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [ // import Angular's modules
     BrowserModule,

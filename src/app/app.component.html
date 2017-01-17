@@ -1,0 +1,36 @@
+<nav class="container-fluid">
+  <!--a [routerLink]=" ['./'] " routerLinkActive="active">
+    Index
+  </a>
+  <a [routerLink]=" ['./home'] " routerLinkActive="active">
+    Home
+  </a>
+  <a [routerLink]=" ['./detail'] " routerLinkActive="active">
+    Detail
+  </a>
+  <a [routerLink]=" ['./barrel'] " routerLinkActive="active">
+    Barrel
+  </a>
+  <a [routerLink]=" ['./about'] " routerLinkActive="active">
+    About
+  </a-->
+  <div class="col-lg-3 col-md-offset-9 pull-right">
+    <a class="btn btn-primary" [routerLink]=" ['./signup'] ">Sign Up</a>
+    <a class="btn btn-primary" [routerLink]=" ['./login'] ">Login</a>
+  </div>
+</nav>
+
+<main>
+  <router-outlet></router-outlet>
+</main>
+
+<!-- <pre class="app-state">this.appState.state = {{ appState.state | json }}</pre> -->
+
+<footer>
+  <span>WebPack Angular 2 Starter by <a [href]="url">@EventRunner</a></span>
+  <div>
+    <a [href]="url">
+      <img [src]="angularclassLogo" width="25%">
+    </a>
+  </div>
+</footer>

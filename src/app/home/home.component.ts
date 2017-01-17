@@ -7,7 +7,7 @@ import { AppState } from '../app.service';
 import { Title } from './title';
 import { XLargeDirective } from './x-large';
 import { TestApiService } from '../test-api.service';
-import { Response } from '@angular/http';
+// import { Response } from '@angular/http';
 
 @Component({
   // The selector is what angular internally uses
@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit {
   }
 
   public testServer() {
-      console.log('testServer');
-      this.testApiService.testServer().subscribe((res: Response) => this.buttonLabel = res.text());
+    console.log('testServer');
+    this.testApiService.testServer().then((label: string) => this.buttonLabel = label);
   }
 }
