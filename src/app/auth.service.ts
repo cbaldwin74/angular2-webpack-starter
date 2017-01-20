@@ -25,7 +25,11 @@ export class AuthService {
     console.log('signing up new user');
     return this.http.post('/auth/signup', {firstname, lastname, email, password})
       .toPromise()
-      .then((response) => response.text())
+      .then((response) => {
+        let reply = JSON.parse(response.text());
+        localStorage.setItem('id_token', reply.token);
+        return reply.token;
+      })
       .catch(this.handleError);
   }
 

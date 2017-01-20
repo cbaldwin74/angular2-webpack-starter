@@ -3,6 +3,8 @@ const co = require('bluebird-co');
 const passport = require('koa-passport');
 const db = require('../db/db');
 const jwt = require('../auth/jwt');
+const bcrypt = require('bcrypt');
+const saltRounds = Number(process.env.BCRYPT_SALT_ROUNDS) || 10;
 
 router.prefix('/auth');
 
@@ -22,14 +24,16 @@ router.post('/login',
 router.post('/signup',
   co.wrap(function*(ctx, next) {
     var userInfo = ctx.request.body;
-    var user = yield db.addUser(userInfo.firstname, userInfo.lastname, userInfo.email, userInfo.password);
-    ctx.login(user, function(err) {
+    let encrypted = yield bcrypt.hash(userInfo.password, saltRounds);
+    var user = yield db.addUser(userInfo.firstname, userInfo.lastname, userInfo.email, encrypted);
+    ctx.login(user, co.wrap(function*(err) {
       if (err) {
         return next(err);
       }
 
-      ctx.body = { success: true };
-    });
+      var token = yield jwt.create({ sub: ctx.req.user.id});
+      ctx.body = { token: token };
+    }));
   })
 );
 

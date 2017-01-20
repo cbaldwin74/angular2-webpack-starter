@@ -24,6 +24,9 @@ build/Release
 # Users Environment Variables
 .lock-wscript
 
+# Node Server Environment Variables
+.env
+
 # OS generated files #
 .DS_Store
 ehthumbs.db

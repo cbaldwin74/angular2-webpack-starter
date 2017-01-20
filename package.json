@@ -81,6 +81,7 @@
     "@angularclass/hmr": "~1.2.2",
     "@angularclass/hmr-loader": "~3.0.2",
     "angular2-jwt": "^0.1.28",
+    "bcrypt": "^1.0.2",
     "bluebird": "^3.4.7",
     "bluebird-co": "^2.2.0",
     "body-parser": "^1.15.2",

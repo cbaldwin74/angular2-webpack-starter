@@ -3,6 +3,8 @@ const passport = require('koa-passport');
 const LocalStrategy = require('passport-local').Strategy;
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt  = require('passport-jwt').ExtractJwt;
+const bcrypt = require('bcrypt');
+const co = require('bluebird-co');
 
 const db = require('../db/db');
 
@@ -27,19 +29,18 @@ passport.deserializeUser(function*(id, done) {
   done(null, user);
 });
 
-passport.use(new LocalStrategy(function(email, password, done) {
-  fetchUserByEmail(email)
-    .then(user => {
-      if (email === user.email && password === user.password) {
-        console.log('Good User');
-        done(null, user);
-      } else {
-        console.log('Bad User');
-        done(null, false);
-      }
-    })
-    .catch(err => done(err));
-}));
+passport.use(new LocalStrategy(co.wrap(function*(email, password, done) {
+  let user = yield fetchUserByEmail(email);
+  let equal = yield bcrypt.compare(password, user.password);
+
+  if (email === user.email && equal) {
+    console.log('Good User');
+    done(null, user);
+  } else {
+    console.log('Bad User');
+    done(null, false);
+  }
+})));
 
 var opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeader();
