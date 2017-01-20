@@ -1,4 +1,6 @@
 'use strict';
+require('dotenv').config();
+
 const cluster = require('cluster');
 console.log('Starting TLS server ' + (cluster.worker ? cluster.worker.id : '') + ' at ' + (new Date).toISOString());
 process.on('exit', () => console.log('Process exit at ' + (new Date).toISOString()));

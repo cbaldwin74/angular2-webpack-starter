@@ -1,6 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import {
+  HttpModule,
+  Http,
+  RequestOptions
+} from '@angular/http';
 import {
   NgModule,
   ApplicationRef
@@ -14,6 +18,7 @@ import {
   RouterModule,
   PreloadAllModules
 } from '@angular/router';
+import { AuthHttp } from 'angular2-jwt';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -32,6 +37,8 @@ import { TestApiService } from './test-api.service';
 import { LoginComponent } from './login';
 import { AuthService } from './auth.service';
 import { SignupComponent } from './signup';
+import { authHttpServiceFactory } from './auth-http.service';
+import { AuthGuard } from './guard/auth-guard.service';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
@@ -41,7 +48,13 @@ const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
   AppState,
   TestApiService,
-  AuthService
+  AuthService,
+  {
+    provide: AuthHttp,
+    useFactory: authHttpServiceFactory,
+    deps: [Http, RequestOptions]
+  },
+  AuthGuard
 ];
 
 type StoreType = {

@@ -15,8 +15,9 @@
     About
   </a-->
   <div class="col-lg-3 col-md-offset-9 pull-right">
-    <a class="btn btn-primary" [routerLink]=" ['./signup'] ">Sign Up</a>
-    <a class="btn btn-primary" [routerLink]=" ['./login'] ">Login</a>
+    <a class="btn btn-primary" [routerLink]=" ['./signup'] " *ngIf=!loggedIn()>Sign Up</a>
+    <a class="btn btn-primary" [routerLink]=" ['./login'] " *ngIf=!loggedIn()>Log In</a>
+    <button class="btn btn-primary" *ngIf=loggedIn() (click)="logout()">Log Out</button>
   </div>
 </nav>
 

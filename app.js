@@ -13,7 +13,6 @@ const Koa = require('koa');
 const app = module.exports = new Koa();
 
 const html = require('html-template-tag');
-// const { StyleSheet, css } = require('aphrodite');
 const convert = require('koa-convert');
 const session = require('koa-generic-session');
 const passport = require('koa-passport');
@@ -44,9 +43,11 @@ app.use(require('koa-bodyparser')({
     // BodyParser options here
 }));
 
-require('./auth');
+require('./server/db/db.js');
+
+require('./server/auth/auth');
 app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.session());
 
 class NullOrUndefinedError extends Error {
     constructor(message) {

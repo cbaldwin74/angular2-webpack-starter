@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { tokenNotExpired } from 'angular2-jwt';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -9,16 +10,31 @@ export class AuthService {
 
   public login(email: string, password: string): Promise<any> {
     console.log('submitting login to server');
-    return this.http.post('/auth/login', {email, password})
+    return this.http.post('/auth/login', {username: email, password})
       .toPromise()
-      .then((response) => response.text())
+      .then((response) => {
+        let reply = JSON.parse(response.text());
+        localStorage.setItem('id_token', reply.token);
+        return reply.token;
+      })
       .catch(this.handleError);
   }
 
   public signup(firstname: string, lastname: string, email: string,
                 password: string): Promise<any> {
     console.log('signing up new user');
-    return Promise.resolve(email);
+    return this.http.post('/auth/signup', {firstname, lastname, email, password})
+      .toPromise()
+      .then((response) => response.text())
+      .catch(this.handleError);
+  }
+
+  public loggedIn() {
+    return tokenNotExpired();
+  }
+
+  public logout() {
+    localStorage.removeItem('id_token');
   }
 
   private handleError(error: any): Promise<any> {

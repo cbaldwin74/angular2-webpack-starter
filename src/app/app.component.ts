@@ -8,6 +8,8 @@ import {
 } from '@angular/core';
 import { AppState } from './app.service';
 import { ButtonsModule } from './ng2-bootstrap';
+import { AuthService } from './auth.service';
+import { Router } from '@angular/router';
 
 /*
  * App Component
@@ -20,40 +22,6 @@ import { ButtonsModule } from './ng2-bootstrap';
     './app.component.css'
   ],
   templateUrl: './app.component.html'
-  // template: `
-  //   <nav>
-  //     <a [routerLink]=" ['./'] " routerLinkActive="active">
-  //       Index
-  //     </a>
-  //     <a [routerLink]=" ['./home'] " routerLinkActive="active">
-  //       Home
-  //     </a>
-  //     <a [routerLink]=" ['./detail'] " routerLinkActive="active">
-  //       Detail
-  //     </a>
-  //     <a [routerLink]=" ['./barrel'] " routerLinkActive="active">
-  //       Barrel
-  //     </a>
-  //     <a [routerLink]=" ['./about'] " routerLinkActive="active">
-  //       About
-  //     </a>
-  //   </nav>
-  //
-  //   <main>
-  //     <router-outlet></router-outlet>
-  //   </main>
-  //
-  //   <pre class="app-state">this.appState.state = {{ appState.state | json }}</pre>
-  //
-  //   <footer>
-  //     <span>WebPack Angular 2 Starter by <a [href]="url">@AngularClass</a></span>
-  //     <div>
-  //       <a [href]="url">
-  //         <img [src]="angularclassLogo" width="25%">
-  //       </a>
-  //     </div>
-  //   </footer>
-  // `
 })
 export class AppComponent implements OnInit {
   public angularclassLogo = 'assets/img/angularclass-avatar.png';
@@ -61,13 +29,23 @@ export class AppComponent implements OnInit {
   public url = 'https://twitter.com/EventRunner';
 
   constructor(
-    public appState: AppState
+    public appState: AppState,
+    private auth: AuthService,
+    private router: Router
   ) {}
 
   public ngOnInit() {
     console.log('Initial App State', this.appState.state);
   }
 
+  public loggedIn() {
+    return this.auth.loggedIn();
+  }
+
+  public logout() {
+    this.auth.logout();
+    this.router.navigate([ '/login' ]);
+  }
 }
 
 /*
