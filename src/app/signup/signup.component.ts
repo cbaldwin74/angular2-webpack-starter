@@ -23,7 +23,7 @@ export class SignupComponent implements OnInit {
   public signup(firstname, lastname, email, password) {
     console.log(firstname, lastname, email, password);
     this.authService.signup(firstname, lastname, email, password)
-      .then((result) => this.router.navigate(['home']))
+      .then((result) => this.router.navigate(['dashboard']))
       .catch((err) => console.log(err));
   }
 }

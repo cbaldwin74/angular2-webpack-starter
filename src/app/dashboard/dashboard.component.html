@@ -1,0 +1,37 @@
+<div id="mySidenav" class="sidenav" style="width:50px;" (mouseover)="openNav()">
+  <a href="javascript:void(0)" class="closebtn" (click)="closeNav()" *ngIf="open"><span>&times;</span></a>
+  <a href="#"><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span><span *ngIf="open"> Dashboard</span></a>
+  <a href="#"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span><span *ngIf="open"> Messages</span></a>
+  <a href="#"><span class="glyphicon glyphicon-flag" aria-hidden="true"></span><span *ngIf="open"> My Events</span></a>
+  <a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span><span *ngIf="open"> Profile</span></a>
+  <a href="#">Contact</a>
+</div>
+
+<!-- Use any element to open the sidenav -->
+<!-- <span onclick="openNav()">open</span> -->
+
+<!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
+<div id="main" style="margin-left:50px;">
+  <h1>Dashboard</h1>
+  <h2>Currently Running Events</h2>
+  <tabset>
+    <tab heading="Host">
+      <h3>Your events that are currently running</h3>
+      <div *ngIf="hosted.length > 0">
+      </div>
+      <div *ngIf="hosted.length < 1">
+        None
+      </div>
+      <button class="btn btn-primary">Create Event</button>
+    </tab>
+    <tab heading="Participant">
+      <h3>Running events that you are participating in</h3>
+      <div *ngIf="participating.length > 0">
+      </div>
+      <div *ngIf="participating.length < 1">
+        None
+      </div>
+      <button class="btn btn-primary">Join Event</button>
+    </tab>
+  </tabset>
+</div>

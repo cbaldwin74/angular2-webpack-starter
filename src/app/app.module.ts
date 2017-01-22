@@ -19,6 +19,7 @@ import {
   PreloadAllModules
 } from '@angular/router';
 import { AuthHttp } from 'angular2-jwt';
+import { TabsModule } from 'ng2-bootstrap';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -39,6 +40,7 @@ import { AuthService } from './auth.service';
 import { SignupComponent } from './signup';
 import { authHttpServiceFactory } from './auth-http.service';
 import { AuthGuard } from './guard/auth-guard.service';
+import { DashboardComponent } from './dashboard';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
@@ -75,13 +77,15 @@ type StoreType = {
     NoContentComponent,
     XLargeDirective,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    DashboardComponent
   ],
   imports: [ // import Angular's modules
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
+    TabsModule.forRoot()
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,

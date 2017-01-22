@@ -14,10 +14,16 @@
   <a [routerLink]=" ['./about'] " routerLinkActive="active">
     About
   </a-->
-  <div class="col-lg-3 col-md-offset-9 pull-right">
-    <a class="btn btn-primary" [routerLink]=" ['./signup'] " *ngIf=!loggedIn()>Sign Up</a>
-    <a class="btn btn-primary" [routerLink]=" ['./login'] " *ngIf=!loggedIn()>Log In</a>
-    <button class="btn btn-primary" *ngIf=loggedIn() (click)="logout()">Log Out</button>
+  <div class="row">
+    <div class="col-md-2">
+      <h4>EventRunner</h4>
+    </div>
+
+    <div class="col-md-3 col-md-offset-7">
+      <a class="btn btn-primary pull-right" [routerLink]=" ['./signup'] " *ngIf=!loggedIn()>Sign Up</a>
+      <a class="btn btn-primary pull-right" [routerLink]=" ['./login'] " *ngIf=!loggedIn()>Log In</a>
+      <button class="btn btn-primary pull-right" *ngIf=loggedIn() (click)="logout()">Log Out</button>
+    </div>
   </div>
 </nav>
 

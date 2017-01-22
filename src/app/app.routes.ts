@@ -4,6 +4,8 @@ import { AboutComponent } from './about';
 import { NoContentComponent } from './no-content';
 import { LoginComponent } from './login';
 import { SignupComponent } from './signup';
+import { DashboardComponent } from './dashboard';
+
 import { AuthGuard } from './guard/auth-guard.service';
 
 import { DataResolver } from './app.resolver';
@@ -16,5 +18,6 @@ export const ROUTES: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'detail', loadChildren: './+detail#DetailModule', canActivate: [AuthGuard]},
   { path: 'barrel', loadChildren: './+barrel#BarrelModule'},
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: '**',    component: NoContentComponent },
 ];
