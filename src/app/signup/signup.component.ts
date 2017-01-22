@@ -23,7 +23,11 @@ export class SignupComponent implements OnInit {
   public signup(firstname, lastname, email, password) {
     console.log(firstname, lastname, email, password);
     this.authService.signup(firstname, lastname, email, password)
-      .then((result) => this.router.navigate(['dashboard']))
+      .then((result) => {
+        this.router.navigate([
+          this.authService.redirectUrl ? this.authService.redirectUrl : 'dashboard']);
+        this.authService.redirectUrl = undefined;
+      })
       .catch((err) => console.log(err));
   }
 }

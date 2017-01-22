@@ -20,7 +20,11 @@ export class LoginComponent implements OnInit {
 
   public login(email: string, password: string) {
     this.authService.login(email, password)
-      .then((result) => this.router.navigate(['dashboard']))
+      .then((result) => {
+        this.router.navigate([
+          this.authService.redirectUrl ? this.authService.redirectUrl : 'dashboard']);
+        this.authService.redirectUrl = undefined;
+      })
       .catch((err) => console.log(err));
   }
 }

@@ -6,6 +6,8 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class AuthService {
+  public redirectUrl: string;
+  
   constructor(private http: Http) { }
 
   public login(email: string, password: string): Promise<any> {
