@@ -1,43 +1,41 @@
-<nav class="container-fluid">
-  <!--a [routerLink]=" ['./'] " routerLinkActive="active">
-    Index
-  </a>
-  <a [routerLink]=" ['./home'] " routerLinkActive="active">
-    Home
-  </a>
-  <a [routerLink]=" ['./detail'] " routerLinkActive="active">
-    Detail
-  </a>
-  <a [routerLink]=" ['./barrel'] " routerLinkActive="active">
-    Barrel
-  </a>
-  <a [routerLink]=" ['./about'] " routerLinkActive="active">
-    About
-  </a-->
+<nav *ngIf="!loggedIn()" class="container-fluid">
   <div class="row">
     <div class="col-md-2">
       <h4>EventRunner</h4>
     </div>
 
     <div class="col-md-3 col-md-offset-7">
-      <a class="btn btn-primary pull-right" [routerLink]=" ['./signup'] " *ngIf=!loggedIn()>Sign Up</a>
-      <a class="btn btn-primary pull-right" [routerLink]=" ['./login'] " *ngIf=!loggedIn()>Log In</a>
-      <button class="btn btn-primary pull-right" *ngIf=loggedIn() (click)="logout()">Log Out</button>
+      <a class="btn btn-primary pull-right" [routerLink]=" ['./signup'] ">Sign Up</a>
+      <a class="btn btn-primary pull-right" [routerLink]=" ['./login'] ">Log In</a>
+      <!-- <button class="btn btn-primary pull-right" *ngIf=loggedIn() (click)="logout()">Log Out</button> -->
     </div>
   </div>
 </nav>
 
-<main>
-  <router-outlet></router-outlet>
-</main>
+<div *ngIf="loggedIn()" id="mySidenav" class="sidenav" style="width:50px;" (mouseover)="openNav()">
+  <a href="javascript:void(0)" class="closebtn" (click)="closeNav()" *ngIf="open"><span>&times;</span></a>
+  <a [routerLink]=" ['/dashboard'] "><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span><span *ngIf="open"> Dashboard</span></a>
+  <a href="#"><span class="glyphicon glyphicon-inbox" aria-hidden="true"></span><span *ngIf="open"> Messages</span></a>
+  <a href="#"><span class="glyphicon glyphicon-flag" aria-hidden="true"></span><span *ngIf="open"> My Events</span></a>
+  <a [routerLink]=" ['/profile'] "><span class="glyphicon glyphicon-user" aria-hidden="true"></span><span *ngIf="open"> Profile</span></a>
+  <a href="#"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span><span *ngIf="open"> Contact</span></a>
+  <a href="#" (click)="logout()"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span><span *ngIf="open"> Logout</span></a>
+</div>
 
-<!-- <pre class="app-state">this.appState.state = {{ appState.state | json }}</pre> -->
+<!-- <div id="main" style="margin-left:50px;"> -->
+<div id="main" [ngStyle]="{ 'margin-left.px': marginLeft }">
+  <main>
+    <router-outlet></router-outlet>
+  </main>
 
-<footer>
-  <span>WebPack Angular 2 Starter by <a [href]="url">@EventRunner</a></span>
-  <div>
-    <a [href]="url">
-      <img [src]="angularclassLogo" width="25%">
-    </a>
-  </div>
-</footer>
+  <!-- <pre class="app-state">this.appState.state = {{ appState.state | json }}</pre> -->
+
+  <footer>
+    <span>WebPack Angular 2 Starter by <a [href]="url">@EventRunner</a></span>
+    <div>
+      <a [href]="url">
+        <img [src]="angularclassLogo" width="25%">
+      </a>
+    </div>
+  </footer>
+</div>

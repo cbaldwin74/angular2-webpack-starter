@@ -2,6 +2,7 @@
  * Angular 2 decorators and services
  */
 import {
+  AfterContentChecked,
   Component,
   OnInit,
   ViewEncapsulation
@@ -23,10 +24,12 @@ import { Router } from '@angular/router';
   ],
   templateUrl: './app.component.html'
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterContentChecked {
   public angularclassLogo = 'assets/img/angularclass-avatar.png';
   public name = 'Angular 2 Webpack Starter';
   public url = 'https://twitter.com/EventRunner';
+  public open: boolean;
+  public marginLeft: Number;
 
   constructor(
     public appState: AppState,
@@ -36,6 +39,12 @@ export class AppComponent implements OnInit {
 
   public ngOnInit() {
     console.log('Initial App State', this.appState.state);
+    this.open = false;
+    this.marginLeft = this.loggedIn() ? 50 : 0;
+  }
+
+  public ngAfterContentChecked() {
+    this.marginLeft = this.loggedIn() ? this.open ? 200 : 50 : 0;
   }
 
   public loggedIn() {
@@ -45,6 +54,25 @@ export class AppComponent implements OnInit {
   public logout() {
     this.auth.logout();
     this.router.navigate([ '/login' ]);
+    this.marginLeft = 0;
+    this.open = false;
+  }
+
+  /*
+   * Set the width of the side navigation to 200px and the left margin of the
+   * page content to 200px
+   */
+  public openNav() {
+    document.getElementById('mySidenav').style.width = '200px';
+    this.marginLeft = 200;
+    this.open = true;
+  }
+
+  /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
+  public closeNav() {
+    this.open = false;
+    document.getElementById('mySidenav').style.width = '50px';
+    this.marginLeft = 50;
   }
 }
 

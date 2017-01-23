@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Http } from '@angular/http';
 import { tokenNotExpired } from 'angular2-jwt';
 
@@ -7,7 +7,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class AuthService {
   public redirectUrl: string;
-  
+
   constructor(private http: Http) { }
 
   public login(email: string, password: string): Promise<any> {
