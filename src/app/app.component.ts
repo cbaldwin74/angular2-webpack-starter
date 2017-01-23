@@ -12,6 +12,9 @@ import { ButtonsModule } from './ng2-bootstrap';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 
+const SIDE_NAV_CLOSED_WIDTH = 40; // in pixels
+const SIDE_NAV_OPEN_WIDTH = 200; // in pixels
+
 /*
  * App Component
  * Top Level Component
@@ -40,11 +43,11 @@ export class AppComponent implements OnInit, AfterContentChecked {
   public ngOnInit() {
     console.log('Initial App State', this.appState.state);
     this.open = false;
-    this.marginLeft = this.loggedIn() ? 50 : 0;
+    this.marginLeft = this.loggedIn() ? SIDE_NAV_CLOSED_WIDTH : 0;
   }
 
   public ngAfterContentChecked() {
-    this.marginLeft = this.loggedIn() ? this.open ? 200 : 50 : 0;
+    this.marginLeft = this.loggedIn() ? this.open ? 200 : SIDE_NAV_CLOSED_WIDTH : 0;
   }
 
   public loggedIn() {
@@ -63,16 +66,16 @@ export class AppComponent implements OnInit, AfterContentChecked {
    * page content to 200px
    */
   public openNav() {
-    document.getElementById('mySidenav').style.width = '200px';
-    this.marginLeft = 200;
+    document.getElementById('mySidenav').style.width = SIDE_NAV_OPEN_WIDTH + 'px';
+    this.marginLeft = SIDE_NAV_OPEN_WIDTH;
     this.open = true;
   }
 
   /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
   public closeNav() {
     this.open = false;
-    document.getElementById('mySidenav').style.width = '50px';
-    this.marginLeft = 50;
+    document.getElementById('mySidenav').style.width = SIDE_NAV_CLOSED_WIDTH + 'px';
+    this.marginLeft = SIDE_NAV_CLOSED_WIDTH;
   }
 }
 

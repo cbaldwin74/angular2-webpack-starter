@@ -12,7 +12,7 @@
   </div>
 </nav>
 
-<div *ngIf="loggedIn()" id="mySidenav" class="sidenav" style="width:50px;" (mouseover)="openNav()">
+<div *ngIf="loggedIn()" id="mySidenav" class="sidenav" style="width:40px;" (mouseover)="openNav()">
   <a href="javascript:void(0)" class="closebtn" (click)="closeNav()" *ngIf="open"><span>&times;</span></a>
   <a [routerLink]=" ['/dashboard'] "><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span><span *ngIf="open"> Dashboard</span></a>
   <a href="#"><span class="glyphicon glyphicon-inbox" aria-hidden="true"></span><span *ngIf="open"> Messages</span></a>
