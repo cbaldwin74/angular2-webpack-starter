@@ -41,6 +41,8 @@ import { SignupComponent } from './signup';
 import { authHttpServiceFactory } from './auth-http.service';
 import { AuthGuard } from './guard/auth-guard.service';
 import { DashboardComponent } from './dashboard';
+import { ProfileComponent } from './profile';
+import { ProfileService } from './profile/profile.service';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
@@ -56,7 +58,8 @@ const APP_PROVIDERS = [
     useFactory: authHttpServiceFactory,
     deps: [Http, RequestOptions]
   },
-  AuthGuard
+  AuthGuard,
+  ProfileService
 ];
 
 type StoreType = {
@@ -78,7 +81,8 @@ type StoreType = {
     XLargeDirective,
     LoginComponent,
     SignupComponent,
-    DashboardComponent
+    DashboardComponent,
+    ProfileComponent
   ],
   imports: [ // import Angular's modules
     BrowserModule,

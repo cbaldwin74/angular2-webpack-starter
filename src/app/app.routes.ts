@@ -5,10 +5,12 @@ import { NoContentComponent } from './no-content';
 import { LoginComponent } from './login';
 import { SignupComponent } from './signup';
 import { DashboardComponent } from './dashboard';
+import { ProfileComponent } from './profile';
 
 import { AuthGuard } from './guard/auth-guard.service';
 
 import { DataResolver } from './app.resolver';
+import { ProfileResolver } from './profile/profile.resolver';
 
 export const ROUTES: Routes = [
   { path: '',      component: HomeComponent },
@@ -19,5 +21,7 @@ export const ROUTES: Routes = [
   { path: 'detail', loadChildren: './+detail#DetailModule', canActivate: [AuthGuard]},
   { path: 'barrel', loadChildren: './+barrel#BarrelModule'},
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard],
+    resolve: { profile: ProfileResolver } },
   { path: '**',    component: NoContentComponent },
 ];

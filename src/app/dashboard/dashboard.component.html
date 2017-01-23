@@ -3,7 +3,7 @@
   <a href="#"><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span><span *ngIf="open"> Dashboard</span></a>
   <a href="#"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span><span *ngIf="open"> Messages</span></a>
   <a href="#"><span class="glyphicon glyphicon-flag" aria-hidden="true"></span><span *ngIf="open"> My Events</span></a>
-  <a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span><span *ngIf="open"> Profile</span></a>
+  <a [routerLink]=" ['/profile'] "><span class="glyphicon glyphicon-user" aria-hidden="true"></span><span *ngIf="open"> Profile</span></a>
   <a href="#">Contact</a>
 </div>
 
