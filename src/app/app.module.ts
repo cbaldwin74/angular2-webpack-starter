@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   HttpModule,
   Http,
@@ -19,7 +19,12 @@ import {
   PreloadAllModules
 } from '@angular/router';
 import { AuthHttp } from 'angular2-jwt';
-import { TabsModule } from 'ng2-bootstrap';
+import {
+  DatepickerModule,
+  TabsModule,
+  TimepickerModule
+} from 'ng2-bootstrap';
+import { AgmCoreModule } from 'angular2-google-maps/core';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -43,6 +48,7 @@ import { AuthGuard } from './guard/auth-guard.service';
 import { DashboardComponent } from './dashboard';
 import { ProfileComponent } from './profile';
 import { ProfileService } from './profile/profile.service';
+import { EventEditComponent } from './event-edit';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
@@ -82,14 +88,22 @@ type StoreType = {
     LoginComponent,
     SignupComponent,
     DashboardComponent,
-    ProfileComponent
+    ProfileComponent,
+    EventEditComponent
   ],
   imports: [ // import Angular's modules
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
-    TabsModule.forRoot()
+    TabsModule.forRoot(),
+    DatepickerModule.forRoot(),
+    TimepickerModule.forRoot(),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBfHnnr-A14OzOoFHDyYLYX8biyxYGh1eo',
+      libraries: ['places']
+    }),
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,

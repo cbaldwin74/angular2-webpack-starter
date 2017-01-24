@@ -9,7 +9,7 @@
       <div *ngIf="hosted.length < 1">
         None
       </div>
-      <button class="btn btn-primary">Create Event</button>
+      <a class="btn btn-primary" [routerLink]=" ['/event-edit'] ">Create Event</a>
     </tab>
     <tab heading="Participant">
       <h3>Running events that you are participating in</h3>

@@ -21,7 +21,8 @@
       "selenium-webdriver",
       "source-map",
       "uglify-js",
-      "webpack"
+      "webpack",
+      "googlemaps"
     ]
   },
   "exclude": [

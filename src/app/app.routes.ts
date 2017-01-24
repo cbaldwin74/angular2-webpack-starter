@@ -6,6 +6,7 @@ import { LoginComponent } from './login';
 import { SignupComponent } from './signup';
 import { DashboardComponent } from './dashboard';
 import { ProfileComponent } from './profile';
+import { EventEditComponent } from './event-edit';
 
 import { AuthGuard } from './guard/auth-guard.service';
 
@@ -23,5 +24,6 @@ export const ROUTES: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard],
     resolve: { profile: ProfileResolver } },
+  { path: 'event-edit', component: EventEditComponent, canActivate: [AuthGuard] },
   { path: '**',    component: NoContentComponent },
 ];
