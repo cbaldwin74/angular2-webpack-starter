@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AuthHttp } from 'angular2-jwt';
-import { Profile } from './profile';
+import { ProfileModel } from './profile.model';
 
 @Injectable()
 export class ProfileService {
   constructor(private http: AuthHttp) { }
 
-  public getProfile(id: number): Promise<Profile> {
-    return Promise.resolve(new Profile('Chris', 'Baldwin', 'cbaldwin@shaw.ca'));
+  public getProfile(id: number): Promise<ProfileModel> {
+    return Promise.resolve(new ProfileModel('Chris', 'Baldwin', 'cbaldwin@shaw.ca'));
   }
 }

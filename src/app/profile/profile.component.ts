@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Profile } from './profile';
+import { ProfileModel } from './profile.model';
 
 @Component({
   selector: 'profile',
   templateUrl: 'profile.component.html',
 })
 export class ProfileComponent implements OnInit {
-  public profile: Profile;
+  public profile: ProfileModel;
 
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.data.subscribe((data: {profile: Profile}) => {
+    this.route.data.subscribe((data: {profile: ProfileModel}) => {
       this.profile = data.profile;
     });
   }
