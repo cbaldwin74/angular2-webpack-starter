@@ -5,7 +5,8 @@ export class EventModel {
               public start: Date = new Date(),
               public location: string = '',
               public lat: number = 49.214073199999994,
-              public lng: number = -122.9649724) { }
+              public lng: number = -122.9649724,
+              public ownerId: number = null) { }
 
   public getId(): number {
     return this.id;

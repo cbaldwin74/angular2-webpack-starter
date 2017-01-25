@@ -50,6 +50,7 @@ import { ProfileComponent } from './profile';
 import { ProfileService } from './profile/profile.service';
 import { EventEditComponent } from './event-edit';
 import { EqualValidator } from './directives/equal-validator.directive';
+import { EventService } from './models/event.service.ts';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
@@ -66,7 +67,8 @@ const APP_PROVIDERS = [
     deps: [Http, RequestOptions]
   },
   AuthGuard,
-  ProfileService
+  ProfileService,
+  EventService
 ];
 
 type StoreType = {

@@ -21,7 +21,8 @@ export class EventEditComponent implements OnInit {
 
   constructor(
     private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private events: EventService
   ) { }
 
   public ngOnInit() {
@@ -58,7 +59,10 @@ export class EventEditComponent implements OnInit {
   }
 
   public saveEvent() {
-    console.log(this.event);
+    this.events.saveEvent(this.event).then((event) => {
+      this.event = event;
+    })
+    .catch((err) => console.error(err));
   }
 
   public markerDragEnded(event) {

@@ -40,6 +40,16 @@ export class AuthService {
     localStorage.removeItem('id_token');
   }
 
+  public getUserId(): number {
+    let token = localStorage.getItem('id_token');
+
+    if (token) {
+      return this.jwtHelper.decodeToken(token).sub;
+    } else {
+      return null;
+    }
+  }
+
   private handleTokenReply(response: Response): string {
     let reply = JSON.parse(response.text());
     localStorage.setItem('id_token', reply.token);
