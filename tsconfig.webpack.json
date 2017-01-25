@@ -16,7 +16,8 @@
     ],
     "types": [
       "hammerjs",
-      "node"
+      "node",
+      "googlemaps"
     ]
   },
   "exclude": [

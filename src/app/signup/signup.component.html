@@ -1,16 +1,22 @@
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
     <div class="center-block">
-      <form (ngSubmit)="signup(localState.firstname, localState.lastname, localState.email, localState.password)" autocomplete="off">
+      <form (ngSubmit)="signup(localState.firstname, localState.lastname, localState.email, localState.password)"
+        autocomplete="off" #signupForm="ngForm">
         <div class="form-group">
           <label for="firstname">First Name</label>
           <input
             class="form-control"
             id="firstname"
-            [value]="localState.firstname"
-            (input)="localState.firstname = $event.target.value"
+            [(ngModel)]="localState.firstname"
+            name="firstname"
+            #firstname="ngModel"
             placeholder="First Name"
-            autofocus>
+            autofocus required>
+          <div [hidden]="firstname.valid || firstname.pristine"
+            class="alert alert-danger">
+            A first name is required
+          </div>
         </div>
 
         <div class="form-group">
@@ -18,8 +24,8 @@
           <input
             class="form-control"
             id="lastname"
-            [value]="localState.lastname"
-            (input)="localState.lastname = $event.target.value"
+            [(ngModel)]="localState.lastname"
+            name="lastname"
             placeholder="Last Name">
         </div>
 
@@ -28,9 +34,15 @@
           <input
             class="form-control"
             id="email"
-            [value]="localState.email"
-            (input)="localState.email = $event.target.value"
-            placeholder="Emal Address">
+            type="email"
+            [(ngModel)]="localState.email"
+            name="email"
+            #email="ngModel"
+            placeholder="Emal Address" required>
+          <div [hidden]="email.valid || email.pristine"
+            class="alert alert-danger">
+            An email address is required
+          </div>
         </div>
 
         <div class="form-group">
@@ -38,12 +50,36 @@
           <input
             class="form-control"
             id="password"
-            [value]="localState.password"
-            (input)="localState.password = $event.target.value"
-            placeholder="Password">
+            type="password"
+            [(ngModel)]="localState.password"
+            name="password"
+            #password="ngModel"
+            placeholder="Password"
+            validateEqual="passwordConfirm" reverse="true" required>
+          <div [hidden]="password.valid || password.pristine"
+            class="alert alert-danger">
+            A password is required
+          </div>
         </div>
 
-        <button type="submit" class="btn btn-primary">Sign Up</button>
+        <div class="form-group">
+          <label for="password">Confirm Password</label>
+          <input
+            class="form-control"
+            id="passwordConfirm"
+            type="password"
+            [(ngModel)]="localState.passwordConfirm"
+            name="passwordConfirm"
+            #passwordConfirm="ngModel"
+            placeholder="Confirm Password"
+            validateEqual="password" required>
+          <div [hidden]="passwordConfirm.valid || passwordConfirm.pristine"
+            class="alert alert-danger">
+            Must match the password
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="!signupForm.form.valid">Sign Up</button>
       </form>
     </div>
   </div>

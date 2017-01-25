@@ -1,12 +1,13 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
-import { Http } from '@angular/http';
-import { tokenNotExpired } from 'angular2-jwt';
+import { Http, Response } from '@angular/http';
+import { JwtHelper, tokenNotExpired } from 'angular2-jwt';
 
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class AuthService {
   public redirectUrl: string;
+  private jwtHelper: JwtHelper = new JwtHelper();
 
   constructor(private http: Http) { }
 
@@ -15,9 +16,7 @@ export class AuthService {
     return this.http.post('/auth/login', {username: email, password})
       .toPromise()
       .then((response) => {
-        let reply = JSON.parse(response.text());
-        localStorage.setItem('id_token', reply.token);
-        return reply.token;
+        return this.handleTokenReply(response);
       })
       .catch(this.handleError);
   }
@@ -28,9 +27,7 @@ export class AuthService {
     return this.http.post('/auth/signup', {firstname, lastname, email, password})
       .toPromise()
       .then((response) => {
-        let reply = JSON.parse(response.text());
-        localStorage.setItem('id_token', reply.token);
-        return reply.token;
+        return this.handleTokenReply(response);
       })
       .catch(this.handleError);
   }
@@ -41,6 +38,13 @@ export class AuthService {
 
   public logout() {
     localStorage.removeItem('id_token');
+  }
+
+  private handleTokenReply(response: Response): string {
+    let reply = JSON.parse(response.text());
+    localStorage.setItem('id_token', reply.token);
+
+    return reply.token;
   }
 
   private handleError(error: any): Promise<any> {

@@ -49,6 +49,7 @@ import { DashboardComponent } from './dashboard';
 import { ProfileComponent } from './profile';
 import { ProfileService } from './profile/profile.service';
 import { EventEditComponent } from './event-edit';
+import { EqualValidator } from './directives/equal-validator.directive';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
@@ -89,7 +90,8 @@ type StoreType = {
     SignupComponent,
     DashboardComponent,
     ProfileComponent,
-    EventEditComponent
+    EventEditComponent,
+    EqualValidator
   ],
   imports: [ // import Angular's modules
     BrowserModule,

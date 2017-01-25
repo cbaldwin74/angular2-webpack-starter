@@ -1,16 +1,18 @@
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
     <div class="center-block">
-      <form (ngSubmit)="login(localState.email, localState.password)" autocomplete="off">
+      <form (ngSubmit)="login(localState.email, localState.password)"
+        autocomplete="off" #loginForm="ngForm">
 
         <div class="form-group">
           <label for="email">Email</label>
           <input
             class="form-control"
             id="email"
-            [value]="localState.email"
-            (input)="localState.email = $event.target.value"
-            placeholder="Username">
+            type="email"
+            [(ngModel)]="localState.email"
+            name="email"
+            placeholder="Username" required>
         </div>
 
         <div class="form-group">
@@ -18,12 +20,13 @@
           <input
             class="form-control"
             id="password"
-            [value]="localState.password"
-            (input)="localState.password = $event.target.value"
-            placeholder="Password">
+            type="password"
+            [(ngModel)]="localState.password"
+            name="password"
+            placeholder="Password" required>
         </div>
 
-        <button type="submit" class="btn btn-primary">Login</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!loginForm.form.valid">Login</button>
       </form>
     </div>
   </div>
