@@ -19,13 +19,42 @@ export class EventService {
 
     return this.http.post('/api/event', event)
         .toPromise()
-        .then((response: Response) => {
+        .then((response: Response): EventModel => {
           let resObj = JSON.parse(response.text());
           let resEvent = resObj.data;
-          return new EventModel(resEvent.id, resEvent.name, resEvent.description,
-            new Date(resEvent.start), '', resEvent.lat, resEvent.lng, resEvent.ownerId);
+          return this.makeEvent(resEvent);
         })
         .catch(this.handleError);
+  }
+
+  public publicEvents(): Promise<EventModel[]> {
+    return this.http.get('/api/events')
+      .toPromise()
+      .then((response: Response): EventModel[] => {
+        let resObj = JSON.parse(response.text());
+        let resEvents = resObj.data;
+        console.log(resEvents);
+
+        return resEvents.map(this.makeEvent);
+      })
+      .catch(this.handleError);
+  }
+
+  public currentUserEvents(): Promise<EventModel[]> {
+    return this.http.get('/api/events/' + this.auth.getUserId())
+      .toPromise()
+      .then((response: Response): EventModel[] => {
+        let resObj = JSON.parse(response.text());
+        let resEvents = resObj.data;
+
+        return resEvents.map(this.makeEvent);
+      })
+      .catch(this.handleError);
+  }
+
+  private makeEvent(eventData): EventModel {
+    return new EventModel(eventData.id, eventData.name, eventData.description,
+      new Date(eventData.start), '', eventData.lat, eventData.lng, eventData.ownerId);
   }
 
   private handleError(error: any): Promise<any> {

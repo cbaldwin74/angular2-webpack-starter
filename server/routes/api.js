@@ -80,6 +80,46 @@ router.post('/event', co.wrap(function*(ctx, next) {
   });
 }));
 
+router.get('/events', co.wrap(function*(ctx, next) {
+  var options = {
+    hostname: process.env.EVENT_RUNNER_HOST,
+    method: 'GET',
+    path: '/api/events',
+    headers: {
+      'X-Authorization': process.env.EVENT_RUNNER_API_KEY,
+      'Content-Type': 'application/json'
+    }
+  };
+
+  yield sendRequest(options, null).then(function(result) {
+    console.log(result);
+
+    ctx.body = result;
+  })
+  .catch(function(err) {
+    console.log(err);
+    throw err;
+  });
+}));
+
+router.get('/events/:ownerId', co.wrap(function*(ctx, next) {
+  var options = {
+    hostname: process.env.EVENT_RUNNER_HOST,
+    method: 'GET',
+    path: '/api/events/' + ctx.params.ownerId,
+    headers: {
+      'X-Authorization': process.env.EVENT_RUNNER_API_KEY,
+      'Content-Type': 'application/json'
+    }
+  };
+
+  yield sendRequest(options, null).then((result) => ctx.body = result)
+  .catch(function(err) {
+    console.log(err);
+    throw err;
+  });
+}));
+
 function sendRequest(options, data) {
   // console.log('sending request', options);
   return new Promise(function(resolve, reject) {

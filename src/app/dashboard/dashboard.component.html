@@ -3,16 +3,22 @@
   <h2>Currently Running Events</h2>
   <tabset>
     <tab heading="Host">
-      <h3>Your events that are currently running</h3>
+      <div class="row">
+        <h3 class="col-md-6">Events you are hosting ({{hosted.length}})</h3>
+        <span class="col-md-2 pull-right"><a class="btn btn-primary" [routerLink]=" ['/event-edit'] ">Create Event</a></span>
+      </div>
       <div *ngIf="hosted.length > 0">
+        <div *ngFor="let event of hosted">
+          <h3>{{event.name}}</h3>
+          <hr>
+        </div>
       </div>
       <div *ngIf="hosted.length < 1">
         None
       </div>
-      <a class="btn btn-primary" [routerLink]=" ['/event-edit'] ">Create Event</a>
     </tab>
     <tab heading="Participant">
-      <h3>Running events that you are participating in</h3>
+      <h3>Events you are participating in</h3>
       <div *ngIf="participating.length > 0">
       </div>
       <div *ngIf="participating.length < 1">

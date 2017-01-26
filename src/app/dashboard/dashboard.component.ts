@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthHttp } from 'angular2-jwt';
+import { EventService } from '../models/event.service';
+import { EventModel } from '../models/event.model';
 
 @Component({
   selector: 'dashboard',
@@ -7,13 +8,14 @@ import { AuthHttp } from 'angular2-jwt';
   styleUrls: [ './dashboard.component.css' ],
 })
 export class DashboardComponent implements OnInit {
-  public hosted: Object[];
-  public participating: Object[];
+  public hosted: EventModel[] = [];
+  public participating: EventModel[] = [];
 
-  constructor(private http: AuthHttp) {  }
+  constructor(private events: EventService) {  }
 
-  ngOnInit() {
-    this.hosted = [];
+  public ngOnInit() {
+    this.events.currentUserEvents()
+      .then((userEvents) => this.hosted = userEvents);
     this.participating = [];
   }
 }
