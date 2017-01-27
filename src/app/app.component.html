@@ -16,7 +16,7 @@
   <a href="javascript:void(0)" class="closebtn" (click)="closeNav()" *ngIf="open"><span>&times;</span></a>
   <a [routerLink]=" ['/dashboard'] "><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span><span *ngIf="open"> Dashboard</span></a>
   <a href="#"><span class="glyphicon glyphicon-inbox" aria-hidden="true"></span><span *ngIf="open"> Messages</span></a>
-  <a href="#"><span class="glyphicon glyphicon-flag" aria-hidden="true"></span><span *ngIf="open"> My Events</span></a>
+  <a [routerLink]=" ['/events'] "><span class="glyphicon glyphicon-flag" aria-hidden="true"></span><span *ngIf="open"> My Events</span></a>
   <a [routerLink]=" ['/profile'] "><span class="glyphicon glyphicon-user" aria-hidden="true"></span><span *ngIf="open"> Profile</span></a>
   <a href="#"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span><span *ngIf="open"> Contact</span></a>
   <a href="#" (click)="logout()"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span><span *ngIf="open"> Logout</span></a>

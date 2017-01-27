@@ -1,6 +1,5 @@
 <div>
-  <h1>Dashboard</h1>
-  <h2>Currently Running Events</h2>
+  <h1>My Events</h1>
   <tabset>
     <tab heading="Host">
       <div class="row">
@@ -9,10 +8,7 @@
       </div>
       <div *ngIf="hosted.length > 0">
         <div *ngFor="let event of hosted">
-          <div class="row">
-            <h3  class="col-md-4">{{event.name}}</h3>
-            <span class="col-md-2 pull-right"><button class="btn btn-success" (click)="editEvent(event.id)">Edit</button></span>
-          </div>
+          <h3>{{event.name}}</h3>
           <hr>
         </div>
       </div>

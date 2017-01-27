@@ -1,7 +1,9 @@
 import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
-import {  FormControl } from '@angular/forms';
+import { FormControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { MapsAPILoader } from 'angular2-google-maps/core';
-
+import 'rxjs/add/operator/switchMap';
+import { Observable } from 'rxjs/Observable';
 import { EventService } from '../models/event.service';
 import { EventModel } from '../models/event.model';
 
@@ -22,15 +24,13 @@ export class EventEditComponent implements OnInit {
   constructor(
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
-    private events: EventService
+    private events: EventService,
+    private route: ActivatedRoute
   ) { }
 
   public ngOnInit() {
     // Create search FormControl
     this.searchControl = new FormControl();
-
-    // Set current location
-    this.setCurrentLocation();
 
     // Load Places autocomplete
     this.mapsAPILoader.load().then(() => {
@@ -56,13 +56,33 @@ export class EventEditComponent implements OnInit {
         });
       });
     });
+
+    this.route.data.subscribe((data: { event: EventModel }) => {
+      if (data.event) {
+        this.event = data.event;
+      } else {
+        this.event = new EventModel();
+      }
+
+      if (!this.event.getId()) {
+        // Set current location
+        this.setCurrentLocation();
+      }
+    });
   }
 
   public saveEvent() {
-    this.events.saveEvent(this.event).then((event) => {
-      this.event = event;
-    })
-    .catch((err) => console.error(err));
+    if (this.event.getId()) {
+      this.events.updateEvent(this.event).then((event) => {
+        this.event = event;
+      })
+      .catch((err) => console.error(err));
+    } else {
+      this.events.saveEvent(this.event).then((event) => {
+        this.event = event;
+      })
+      .catch((err) => console.error(err));
+    }
   }
 
   public markerDragEnded(event) {
