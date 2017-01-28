@@ -11,6 +11,7 @@ import { AppState } from './app.service';
 import { ButtonsModule } from './ng2-bootstrap';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
+import { Alert, AlertService } from './alerts';
 
 const SIDE_NAV_CLOSED_WIDTH = 40; // in pixels
 const SIDE_NAV_OPEN_WIDTH = 200; // in pixels
@@ -37,7 +38,8 @@ export class AppComponent implements OnInit, AfterContentChecked {
   constructor(
     public appState: AppState,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private alerts: AlertService
   ) {}
 
   public ngOnInit() {

@@ -6,6 +6,7 @@ import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable';
 import { EventService } from '../models/event.service';
 import { EventModel } from '../models/event.model';
+import { AlertService } from '../alerts';
 
 @Component({
   selector: 'event-edit',
@@ -25,7 +26,8 @@ export class EventEditComponent implements OnInit {
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
     private events: EventService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private alerts: AlertService
   ) { }
 
   public ngOnInit() {
@@ -75,6 +77,7 @@ export class EventEditComponent implements OnInit {
     if (this.event.getId()) {
       this.events.updateEvent(this.event).then((event) => {
         this.event = event;
+        this.alerts.alertSuccess('Event updated.');
       })
       .catch((err) => console.error(err));
     } else {

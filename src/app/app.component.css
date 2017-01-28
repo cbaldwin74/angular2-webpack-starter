@@ -49,6 +49,14 @@
     .sidenav a {font-size: 18px;}
 }
 
+.alerts {
+  position: fixed;
+  width: 50%;
+  top: 0;
+  left: 25%;
+  z-index: 999;
+}
+
 html, body{
   height: 100%;
   font-family: Arial, Helvetica, sans-serif

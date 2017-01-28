@@ -25,7 +25,16 @@
 <!-- <div id="main" style="margin-left:50px;"> -->
 <div id="main" [ngStyle]="{ 'margin-left.px': marginLeft }">
   <main>
-    <router-outlet></router-outlet>
+    <div style="position:relative;width:100%;">
+      <div class="alerts">
+        <div *ngFor="let alert of alerts.alerts">
+          <alert [type]="alert.type" [dismissible]="alert.dismissible" [dismissOnTimeout]="alert.timeout">{{ alert.msg }}</alert>
+        </div>
+      </div>
+      <div>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
   </main>
 
   <!-- <pre class="app-state">this.appState.state = {{ appState.state | json }}</pre> -->

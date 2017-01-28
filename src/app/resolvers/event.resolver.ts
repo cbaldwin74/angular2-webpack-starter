@@ -11,7 +11,6 @@ export class EventResolver implements Resolve<EventModel> {
 
   public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<EventModel> {
     let id: number  = route.params['id'];
-    console.log('Resolving event', id);
 
     if (id) {
       return this.events.getEvent(id).then((event: EventModel) => {

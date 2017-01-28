@@ -22,7 +22,8 @@ import { AuthHttp } from 'angular2-jwt';
 import {
   DatepickerModule,
   TabsModule,
-  TimepickerModule
+  TimepickerModule,
+  AlertModule
 } from 'ng2-bootstrap';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 
@@ -52,6 +53,7 @@ import { EventEditComponent } from './event-edit';
 import { EqualValidator } from './directives/equal-validator.directive';
 import { EventService } from './models/event.service.ts';
 import { EventsComponent } from './events';
+import { AlertService } from './alerts';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
@@ -69,7 +71,8 @@ const APP_PROVIDERS = [
   },
   AuthGuard,
   ProfileService,
-  EventService
+  EventService,
+  AlertService
 ];
 
 type StoreType = {
@@ -110,6 +113,7 @@ type StoreType = {
       apiKey: 'AIzaSyBfHnnr-A14OzOoFHDyYLYX8biyxYGh1eo',
       libraries: ['places']
     }),
+    AlertModule.forRoot(),
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
