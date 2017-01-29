@@ -1,0 +1,15 @@
+<label for="location">Starting Location</label>
+<div class="form-group">
+  <input id="location" placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
+</div>
+<div id="start">
+  <sebm-google-map [latitude]="location.lat" [longitude]="location.lng" [zoom]="12"
+    (mapClick)="mapClicked($event)">
+    <sebm-google-map-marker [latitude]="location.lat" [longitude]="location.lng" [markerDraggable]="true"
+      (dragEnd)="markerDragEnded($event)"></sebm-google-map-marker>
+  </sebm-google-map>
+</div>
+<div class="form-group row">
+  <span class="col-md-4">Latitude: {{location.lat}}</span>
+  <span class="col-md-4">Longitude: {{location.lng}}</span>
+</div>

@@ -41,7 +41,8 @@
         </div>
 
         <div class="form-group">
-          <label for="location">Starting Location</label>
+          <location-form [location]="event.location"></location-form>
+          <!-- <label for="location">Starting Location</label>
           <div class="form-group">
             <input id="location" placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
           </div>
@@ -55,7 +56,7 @@
           <div class="form-group row">
             <span class="col-md-4">Latitude: {{event.lat}}</span>
             <span class="col-md-4">Longitude: {{event.lng}}</span>
-          </div>
+          </div> -->
         </div>
 
         <button type="submit" class="btn btn-success">Save</button>

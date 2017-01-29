@@ -3,6 +3,7 @@ import { Response } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
 import { EventModel } from './event.model';
 import { AuthService } from '../auth.service';
+import { GeoLocationModel } from './geo-location.model';
 
 @Injectable()
 export class EventService {
@@ -24,7 +25,7 @@ export class EventService {
   public saveEvent(event: EventModel): Promise<EventModel> {
     event.ownerId = this.auth.getUserId();
 
-    return this.http.post('/api/event', event)
+    return this.http.post('/api/event', this.prepareEventObj(event))
         .toPromise()
         .then((response: Response): EventModel => {
           return this.handleEventResponse(response);
@@ -38,7 +39,7 @@ export class EventService {
   public updateEvent(event: EventModel): Promise<EventModel> {
     event.ownerId = this.auth.getUserId();
 
-    return this.http.put('/api/event', event)
+    return this.http.put('/api/event', this.prepareEventObj(event))
         .toPromise()
         .then((response: Response): EventModel => {
           return this.handleEventResponse(response);
@@ -66,7 +67,9 @@ export class EventService {
 
   private makeEvent(eventData): EventModel {
     return new EventModel(eventData.id, eventData.name, eventData.description,
-      new Date(eventData.start), '', eventData.lat, eventData.lng, eventData.ownerId);
+      new Date(eventData.start),
+      new GeoLocationModel(eventData.lat, eventData.lng, ''),
+      eventData.ownerId);
   }
 
   private handleEventResponse(response: Response): EventModel {
@@ -88,4 +91,15 @@ export class EventService {
       return Promise.reject(error.message || error);
   }
 
+  private prepareEventObj(event: EventModel) {
+    return {
+      id: event.getId(),
+      name: event.name,
+      description: event.description,
+      start: event.start,
+      lat: event.location.lat,
+      lng: event.location.lng,
+      ownerId: event.ownerId
+    };
+  }
 }
