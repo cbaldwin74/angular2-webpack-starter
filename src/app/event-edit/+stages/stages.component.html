@@ -1,0 +1,36 @@
+<div class="row">
+  <h1>Event - Stages</h1>
+</div>
+<div class="row">
+  <div class="center-block">
+    <div class="col-md-8 col-md-offset-2">
+      <form (submit)="saveStage()" autocomplete="off">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input
+            class="form-control"
+            id="name"
+            [(ngModel)]="stage.name"
+            name="name"
+            placeholder="Stage Name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input
+            class="form-control"
+            id="description"
+            [(ngModel)]="stage.description"
+            name="description"
+            placeholder="Optionaly describe this stage">
+        </div>
+
+        <div class="form-group">
+          <location-form [locationId]="'Location'" [location]="stage.location"></location-form>
+        </div>
+
+        <button type="submit" class="btn btn-success">Save</button>
+      </form>
+    </div>
+  </div>
+</div>

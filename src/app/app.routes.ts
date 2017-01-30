@@ -6,7 +6,7 @@ import { LoginComponent } from './login';
 import { SignupComponent } from './signup';
 import { DashboardComponent } from './dashboard';
 import { ProfileComponent } from './profile';
-import { EventEditComponent } from './event-edit';
+// import { EventEditModule } from './event-edit';
 import { EventsComponent } from './events';
 
 import { AuthGuard } from './guard/auth-guard.service';
@@ -28,8 +28,7 @@ export const ROUTES: Routes = [
     resolve: { profile: ProfileResolver } },
   // { path: 'event-edit/:id', component: EventEditComponent, canActivate: [AuthGuard],
   //   resolve: { event: EventResolver } },
-  { path: 'event-edit', component: EventEditComponent, canActivate: [AuthGuard],
-    resolve: { event: EventResolver } },
+  { path: 'event-edit', loadChildren: './event-edit#EventEditModule', canActivate: [AuthGuard] },
   { path: 'events', component: EventsComponent, canActivate: [AuthGuard] },
   { path: '**',    component: NoContentComponent },
 ];

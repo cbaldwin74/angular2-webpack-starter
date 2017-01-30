@@ -20,9 +20,7 @@ import {
 } from '@angular/router';
 import { AuthHttp } from 'angular2-jwt';
 import {
-  DatepickerModule,
   TabsModule,
-  TimepickerModule,
   AlertModule
 } from 'ng2-bootstrap';
 import { AgmCoreModule } from 'angular2-google-maps/core';
@@ -49,12 +47,10 @@ import { AuthGuard } from './guard/auth-guard.service';
 import { DashboardComponent } from './dashboard';
 import { ProfileComponent } from './profile';
 import { ProfileService } from './profile/profile.service';
-import { EventEditComponent } from './event-edit';
 import { EqualValidator } from './directives/equal-validator.directive';
 import { EventService } from './models/event.service.ts';
 import { EventsComponent } from './events';
 import { AlertService } from './alerts';
-import { LocationFormComponent } from './components/location-form';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
@@ -97,10 +93,8 @@ type StoreType = {
     SignupComponent,
     DashboardComponent,
     ProfileComponent,
-    EventEditComponent,
     EqualValidator,
     EventsComponent,
-    LocationFormComponent,
   ],
   imports: [ // import Angular's modules
     BrowserModule,
@@ -109,18 +103,16 @@ type StoreType = {
     HttpModule,
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
     TabsModule.forRoot(),
-    DatepickerModule.forRoot(),
-    TimepickerModule.forRoot(),
+    AlertModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBfHnnr-A14OzOoFHDyYLYX8biyxYGh1eo',
       libraries: ['places']
     }),
-    AlertModule.forRoot(),
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
     APP_PROVIDERS
-  ]
+  ],
 })
 export class AppModule {
 

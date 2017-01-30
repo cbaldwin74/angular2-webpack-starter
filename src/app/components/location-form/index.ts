@@ -1,1 +1,1 @@
-export * from './location-form.component';
+export { LocationFormModule } from './location-form.module';

@@ -1,1 +1,1 @@
-export * from './event-edit.component';
+export { EventEditModule } from './event-edit.module';

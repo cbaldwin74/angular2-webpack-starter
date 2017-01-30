@@ -17,7 +17,11 @@ import { GeoLocationModel } from '../../models/geo-location.model';
 })
 export class LocationFormComponent implements OnInit {
   @Input()
+  public locationId: string;
+  @Input()
   public location: GeoLocationModel;
+  @Input()
+  public label: string;
   public searchControl: FormControl;
   public zoom: number = 4;
 
