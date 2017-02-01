@@ -1,7 +1,14 @@
 import { GeoLocationModel } from './geo-location.model';
 
 export class StageModel {
-  constructor(public name: string = '',
+  constructor(private id: number = null,
+              public name: string = '',
               public description: string = '',
-              public location: GeoLocationModel = new GeoLocationModel()) { }
+              public location: GeoLocationModel = new GeoLocationModel(),
+              public ownerId: number = null,
+              public eventId: number = null) { }
+
+  public getId(): number {
+    return this.id;
+  }
 }

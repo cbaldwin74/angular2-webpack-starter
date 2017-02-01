@@ -55,6 +55,7 @@ router.get('/test', co.wrap(function*(ctx, next) {
     console.log('Done');
 }));
 
+// Events
 
 router.post('/event', co.wrap(function*(ctx, next) {
   var options = {
@@ -149,6 +150,114 @@ router.get('/event/:id', co.wrap(function*(ctx, next) {
     hostname: process.env.EVENT_RUNNER_HOST,
     method: 'GET',
     path: '/api/event/' + ctx.params.id,
+    headers: {
+      'X-Authorization': process.env.EVENT_RUNNER_API_KEY,
+      'Content-Type': 'application/json'
+    }
+  };
+
+  yield sendRequest(options, null).then((result) => ctx.body = result)
+  .catch(function(err) {
+    console.log(err);
+    throw err;
+  });
+}));
+
+// Stage
+
+router.post('/stage', co.wrap(function*(ctx, next) {
+  var options = {
+    hostname: process.env.EVENT_RUNNER_HOST,
+    port: 80,
+    method: 'POST',
+    path: '/api/stage',
+    headers: {
+      'X-Authorization': process.env.EVENT_RUNNER_API_KEY,
+      'Content-Type': 'application/json'
+    }
+  };
+
+  // console.log('received', ctx.request.body);
+  yield sendRequest(options, ctx.request.body).then(function(result) {
+      // console.log('then: ' + result);
+
+      ctx.body = result;
+  })
+  .catch(function(err) {
+    console.log(err);
+    throw err;
+  });
+}));
+
+router.put('/stage', co.wrap(function*(ctx, next) {
+  var options = {
+    hostname: process.env.EVENT_RUNNER_HOST,
+    port: 80,
+    method: 'PUT',
+    path: '/api/stage',
+    headers: {
+      'X-Authorization': process.env.EVENT_RUNNER_API_KEY,
+      'Content-Type': 'application/json'
+    }
+  };
+
+  // console.log('received', ctx.request.body);
+  yield sendRequest(options, ctx.request.body).then(function(result) {
+      // console.log('then: ' + result);
+
+      ctx.body = result;
+  })
+  .catch(function(err) {
+    console.log(err);
+    throw err;
+  });
+}));
+
+router.get('/stages', co.wrap(function*(ctx, next) {
+  var options = {
+    hostname: process.env.EVENT_RUNNER_HOST,
+    method: 'GET',
+    path: '/api/stages',
+    headers: {
+      'X-Authorization': process.env.EVENT_RUNNER_API_KEY,
+      'Content-Type': 'application/json'
+    }
+  };
+
+  yield sendRequest(options, null).then(function(result) {
+    console.log(result);
+
+    ctx.body = result;
+  })
+  .catch(function(err) {
+    console.log(err);
+    throw err;
+  });
+}));
+
+router.get('/stages/:ownerId', co.wrap(function*(ctx, next) {
+  var options = {
+    hostname: process.env.EVENT_RUNNER_HOST,
+    method: 'GET',
+    path: '/api/stages/' + ctx.params.ownerId,
+    headers: {
+      'X-Authorization': process.env.EVENT_RUNNER_API_KEY,
+      'Content-Type': 'application/json'
+    }
+  };
+
+  yield sendRequest(options, null).then((result) => ctx.body = result)
+  .catch(function(err) {
+    console.log(err);
+    throw err;
+  });
+}));
+
+router.get('/stage/:id', co.wrap(function*(ctx, next) {
+  var options = {
+    hostname: process.env.EVENT_RUNNER_HOST,
+    method: 'GET',
+    path: '/api/stage/' + ctx.params.id,
     headers: {
       'X-Authorization': process.env.EVENT_RUNNER_API_KEY,
       'Content-Type': 'application/json'

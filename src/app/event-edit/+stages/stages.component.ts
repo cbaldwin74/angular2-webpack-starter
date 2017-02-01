@@ -3,7 +3,8 @@ import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable';
-import { EventService } from '../../models/event.service';
+import { StageService } from '../../models/stage.service';
+import { EventModel } from '../../models/event.model';
 import { StageModel } from '../../models/stage.model';
 import { AlertService } from '../../alerts';
 
@@ -16,18 +17,43 @@ console.log('`Stages` bundle loaded asynchronously');
 })
 export class StagesComponent implements OnInit {
   public stage: StageModel = new StageModel();
+  public stageList: StageModel[] = [];
+  public eventId: number = null;
 
   constructor(
-    private events: EventService,
+    private stages: StageService,
     private route: ActivatedRoute,
     private alerts: AlertService
   ) { }
 
   public ngOnInit() {
     console.log('hello `Stages` component');
+
+    this.route.data.subscribe((data: { event: EventModel }) => {
+      if (data.event) {
+        this.eventId = data.event.getId();
+        this.stage.eventId = this.eventId;
+
+        this.stages.getStages(this.eventId).then((stages: StageModel[]) => {
+          this.stageList = stages;
+        });
+      }
+    });
   }
 
   public saveStage() {
-    console.log(this.stage);
+    if (this.stage.getId()) {
+      this.stages.updateStage(this.stage).then((savedStage: StageModel) => {
+        this.alerts.alertSuccess('Stage updated.');
+      })
+      .catch((err) => console.error(err));
+    } else {
+      this.stages.saveStage(this.stage).then((savedStage: StageModel) => {
+        this.stageList.push(savedStage);
+        this.stage = new StageModel();
+        this.stage.eventId = this.eventId;
+      })
+      .catch((err) => console.error(err));
+    }
   }
 }

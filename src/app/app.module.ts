@@ -51,6 +51,7 @@ import { EqualValidator } from './directives/equal-validator.directive';
 import { EventService } from './models/event.service.ts';
 import { EventsComponent } from './events';
 import { AlertService } from './alerts';
+import { StageService } from './models/stage.service';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
@@ -69,7 +70,8 @@ const APP_PROVIDERS = [
   AuthGuard,
   ProfileService,
   EventService,
-  AlertService
+  AlertService,
+  StageService,
 ];
 
 type StoreType = {

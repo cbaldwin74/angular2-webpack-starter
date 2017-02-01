@@ -1,10 +1,7 @@
 <div class="row">
-  <h1>Event - Stages</h1>
-</div>
-<div class="row">
   <div class="center-block">
     <div class="col-md-8 col-md-offset-2">
-      <form (submit)="saveStage()" autocomplete="off">
+      <form (submit)="saveStage() && resetForm()" autocomplete="off">
         <div class="form-group">
           <label for="name">Name</label>
           <input
@@ -31,6 +28,12 @@
 
         <button type="submit" class="btn btn-success">Save</button>
       </form>
+      <div>
+        <h2>Event Stages</h2>
+        <div *ngFor="let stage of stageList">
+          {{stage.name}}
+        </div>
+      </div>
     </div>
   </div>
 </div>

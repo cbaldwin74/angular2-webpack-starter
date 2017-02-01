@@ -9,6 +9,7 @@
       <div *ngIf="hosted.length > 0">
         <div *ngFor="let event of hosted">
           <h3>{{event.name}}</h3>
+          <span class="col-md-2 pull-right"><button class="btn btn-success" (click)="editEvent(event.id)">Edit</button></span>
           <hr>
         </div>
       </div>

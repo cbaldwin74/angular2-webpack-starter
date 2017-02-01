@@ -1,7 +1,4 @@
 <div class="row">
-  <h1>Event</h1>
-</div>
-<div class="row">
   <div class="center-block">
     <div class="col-md-8 col-md-offset-2">
       <form (submit)="saveEvent()" autocomplete="off">
@@ -42,21 +39,6 @@
 
         <div class="form-group">
           <location-form [locationId]="'Starting Location'" [location]="event.location"></location-form>
-          <!-- <label for="location">Starting Location</label>
-          <div class="form-group">
-            <input id="location" placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
-          </div>
-          <div id="start">
-            <sebm-google-map [latitude]="event.lat" [longitude]="event.lng" [zoom]="12"
-              (mapClick)="mapClicked($event)">
-              <sebm-google-map-marker [latitude]="event.lat" [longitude]="event.lng" [markerDraggable]="true"
-                (dragEnd)="markerDragEnded($event)"></sebm-google-map-marker>
-            </sebm-google-map>
-          </div>
-          <div class="form-group row">
-            <span class="col-md-4">Latitude: {{event.lat}}</span>
-            <span class="col-md-4">Longitude: {{event.lng}}</span>
-          </div> -->
         </div>
 
         <button type="submit" class="btn btn-success">Save</button>

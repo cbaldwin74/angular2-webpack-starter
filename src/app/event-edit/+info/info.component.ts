@@ -51,6 +51,7 @@ export class InfoComponent implements OnInit {
     } else {
       this.events.saveEvent(this.event).then((event) => {
         this.event = event;
+        this.alerts.alertSuccess('Event saved.');
       })
       .catch((err) => console.error(err));
     }

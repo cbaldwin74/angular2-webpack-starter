@@ -10,7 +10,7 @@ export class EventResolver implements Resolve<EventModel> {
               private location: Location) { }
 
   public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<EventModel> {
-    let id: number  = route.params['id'];
+    let id: number  = this.findIdInRouteTree(route);
 
     if (id) {
       return this.events.getEvent(id).then((event: EventModel) => {
@@ -23,6 +23,16 @@ export class EventResolver implements Resolve<EventModel> {
       });
     } else {
       return Promise.resolve(new EventModel());
+    }
+  }
+
+  private findIdInRouteTree(route: ActivatedRouteSnapshot): number {
+    if (route.params['id']) {
+      return route.params['id'];
+    } else if (route.parent) {
+      return this.findIdInRouteTree(route.parent);
+    } else {
+      return undefined;
     }
   }
 }
