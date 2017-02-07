@@ -1,5 +1,10 @@
 const Sequelize= require('sequelize');
 
+const DB_HOST = process.env.DB_HOST || 'localhost';
+const DB_USERNAME= process.env.DB_USERNAME || 'homestead';
+const DB_PASSWORD = process.env.DB_PASSWORD || 'secret';
+const DB_NAME = process.env.DB_NAME || 'web_runner';
+
 var db = {};
 
 if (db.Sequelize === undefined) {
@@ -7,8 +12,8 @@ if (db.Sequelize === undefined) {
 }
 
 if (db.sequelize === undefined) {
-  var sequelize = new Sequelize('web_runner', 'homestead', 'secret', {
-    host: 'localhost',
+  var sequelize = new Sequelize(DB_NAME, DB_USERNAME, DB_PASSWORD, {
+    host: DB_HOST,
     dialect: 'mysql',
     logging: process.env.NODE_ENV === 'development' ? console.log : false
   });
