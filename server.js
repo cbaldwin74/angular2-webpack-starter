@@ -14,7 +14,9 @@ const spdy = require('spdy');
 const socketIo = require('socket.io')
 const os = require('os');
 
-if (process.getuid() === 0) { // if we are root
+if (process.env.PORT) {
+  var port = process.env.port;
+} else if (process.getuid() === 0) { // if we are root
     var port = 443;
 } else { // we are not root, can only use sockets >1024
     var port = 8443;
