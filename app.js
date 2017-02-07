@@ -23,8 +23,9 @@ app.use(require('koa-conditional-get')());
 app.use(require('koa-etag')());
 
 // create a write stream (in append mode)
-const accessLogStream = fs.createWriteStream(__dirname + '/server/log/access.log',
-                                             { flags: 'a' });
+// const accessLogStream = fs.createWriteStream(__dirname + '/server/log/access.log',
+//                                              { flags: 'a' });
+const accessLogStream = process.stdout;
 app.use(require('koa-morgan')('combined', { stream: accessLogStream }));
 
 app.use(require('koa-compress')({
