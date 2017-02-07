@@ -14,6 +14,7 @@ const spdy = require('spdy');
 const socketIo = require('socket.io')
 const os = require('os');
 
+console.log(process.env.PORT);
 if (process.env.PORT) {
   var port = process.env.PORT;
 } else if (process.getuid() === 0) { // if we are root
@@ -21,7 +22,7 @@ if (process.env.PORT) {
 } else { // we are not root, can only use sockets >1024
     var port = 8443;
 }
-
+console.log(port);
 Promise.coroutine(function*() { // same as an async function; allows use of yield to await promises.
     const keys = yield pem.createCertificateAsync({
         days: 1,
