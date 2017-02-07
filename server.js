@@ -15,7 +15,7 @@ const socketIo = require('socket.io')
 const os = require('os');
 
 if (process.env.PORT) {
-  var port = process.env.port;
+  var port = process.env.PORT;
 } else if (process.getuid() === 0) { // if we are root
     var port = 443;
 } else { // we are not root, can only use sockets >1024
