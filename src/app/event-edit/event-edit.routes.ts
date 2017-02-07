@@ -5,6 +5,7 @@ export const routes = [
     { path: '', redirectTo: 'info', pathMatch: 'full' },
     // { path: '', component: EventEditComponent },
     { path: 'info', loadChildren: './+info#InfoModule' },
-    { path: 'stages', loadChildren: './+stages#StagesModule' }
+    { path: 'stages', loadChildren: './+stages#StagesModule' },
+    { path: 'achievements', loadChildren: './+achievements#AchievementsModule' }
   ]},
 ];

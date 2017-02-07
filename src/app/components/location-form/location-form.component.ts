@@ -22,6 +22,10 @@ export class LocationFormComponent implements OnInit {
   public location: GeoLocationModel;
   @Input()
   public label: string;
+  @Input()
+  public radius: number = 0;
+  @Input()
+  public showCircle: boolean = false;
   public searchControl: FormControl;
   public zoom: number = 4;
 

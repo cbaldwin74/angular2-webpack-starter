@@ -22,7 +22,7 @@
     <tab heading="Participant">
       <div class="row">
         <h3 class="col-md-6">Events you are participating in ({{participating.length}})</h3>
-        <span class="col-md-2 pull-right"><button class="btn btn-primary">Join Event</button></span>
+        <span class="col-md-2 pull-right"><button class="btn btn-primary" [routerLink]=" ['/search'] ">Join Event</button></span>
       </div>
       <div *ngIf="participating.length > 0">
       </div>

@@ -34,7 +34,7 @@ export class EventService {
   }
 
   /**
-   * Update and Event
+   * Update an Event
    */
   public updateEvent(event: EventModel): Promise<EventModel> {
     event.ownerId = this.auth.getUserId();
@@ -63,6 +63,24 @@ export class EventService {
         return this.handleEventArrayResponse(response);
       })
       .catch(this.handleError);
+  }
+
+  public searchEvents(name: string,
+                      location: GeoLocationModel, radius: number): Promise<EventModel[]> {
+    let criteria = {
+      // ownerId: this.auth.getUserId(),
+      name,
+      lng: location.lng,
+      lat: location.lat,
+      radius,
+    };
+
+    return this.http.post('/api/event/search', criteria)
+        .toPromise()
+        .then((response: Response): EventModel[] => {
+          return this.handleEventArrayResponse(response);
+        })
+        .catch(this.handleError);
   }
 
   private makeEvent(eventData): EventModel {

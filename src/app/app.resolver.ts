@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import { ProfileResolver } from './profile/profile.resolver';
 import { EventResolver } from './resolvers/event.resolver';
+import { StagesResolver } from './resolvers/stages.resolver';
 
 @Injectable()
 export class DataResolver implements Resolve<any> {
@@ -17,4 +18,5 @@ export const APP_RESOLVER_PROVIDERS = [
   DataResolver,
   ProfileResolver,
   EventResolver,
+  StagesResolver,
 ];

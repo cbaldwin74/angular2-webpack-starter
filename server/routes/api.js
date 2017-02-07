@@ -163,6 +163,30 @@ router.get('/event/:id', co.wrap(function*(ctx, next) {
   });
 }));
 
+router.post('/event/search', co.wrap(function*(ctx, next) {
+  var options = {
+    hostname: process.env.EVENT_RUNNER_HOST,
+    port: 80,
+    method: 'POST',
+    path: '/api/event/search',
+    headers: {
+      'X-Authorization': process.env.EVENT_RUNNER_API_KEY,
+      'Content-Type': 'application/json'
+    }
+  };
+
+  // console.log('received', ctx.request.body);
+  yield sendRequest(options, ctx.request.body).then(function(result) {
+      // console.log('then: ' + result);
+
+      ctx.body = result;
+  })
+  .catch(function(err) {
+    console.log(err);
+    throw err;
+  });
+}));
+
 // Stage
 
 router.post('/stage', co.wrap(function*(ctx, next) {
@@ -258,6 +282,114 @@ router.get('/stage/:id', co.wrap(function*(ctx, next) {
     hostname: process.env.EVENT_RUNNER_HOST,
     method: 'GET',
     path: '/api/stage/' + ctx.params.id,
+    headers: {
+      'X-Authorization': process.env.EVENT_RUNNER_API_KEY,
+      'Content-Type': 'application/json'
+    }
+  };
+
+  yield sendRequest(options, null).then((result) => ctx.body = result)
+  .catch(function(err) {
+    console.log(err);
+    throw err;
+  });
+}));
+
+// Achievement
+
+router.post('/achievement', co.wrap(function*(ctx, next) {
+  var options = {
+    hostname: process.env.EVENT_RUNNER_HOST,
+    port: 80,
+    method: 'POST',
+    path: '/api/achievement',
+    headers: {
+      'X-Authorization': process.env.EVENT_RUNNER_API_KEY,
+      'Content-Type': 'application/json'
+    }
+  };
+
+  // console.log('received', ctx.request.body);
+  yield sendRequest(options, ctx.request.body).then(function(result) {
+      // console.log('then: ' + result);
+
+      ctx.body = result;
+  })
+  .catch(function(err) {
+    console.log(err);
+    throw err;
+  });
+}));
+
+router.put('/achievementachievement', co.wrap(function*(ctx, next) {
+  var options = {
+    hostname: process.env.EVENT_RUNNER_HOST,
+    port: 80,
+    method: 'PUT',
+    path: '/api/achievement',
+    headers: {
+      'X-Authorization': process.env.EVENT_RUNNER_API_KEY,
+      'Content-Type': 'application/json'
+    }
+  };
+
+  // console.log('received', ctx.request.body);
+  yield sendRequest(options, ctx.request.body).then(function(result) {
+      // console.log('then: ' + result);
+
+      ctx.body = result;
+  })
+  .catch(function(err) {
+    console.log(err);
+    throw err;
+  });
+}));
+
+router.get('/achievements', co.wrap(function*(ctx, next) {
+  var options = {
+    hostname: process.env.EVENT_RUNNER_HOST,
+    method: 'GET',
+    path: '/api/achievements',
+    headers: {
+      'X-Authorization': process.env.EVENT_RUNNER_API_KEY,
+      'Content-Type': 'application/json'
+    }
+  };
+
+  yield sendRequest(options, null).then(function(result) {
+    console.log(result);
+
+    ctx.body = result;
+  })
+  .catch(function(err) {
+    console.log(err);
+    throw err;
+  });
+}));
+
+router.get('/achievements/:eventId', co.wrap(function*(ctx, next) {
+  var options = {
+    hostname: process.env.EVENT_RUNNER_HOST,
+    method: 'GET',
+    path: '/api/achievements/' + ctx.params.eventId,
+    headers: {
+      'X-Authorization': process.env.EVENT_RUNNER_API_KEY,
+      'Content-Type': 'application/json'
+    }
+  };
+
+  yield sendRequest(options, null).then((result) => ctx.body = result)
+  .catch(function(err) {
+    console.log(err);
+    throw err;
+  });
+}));
+
+router.get('/achievement/:id', co.wrap(function*(ctx, next) {
+  var options = {
+    hostname: process.env.EVENT_RUNNER_HOST,
+    method: 'GET',
+    path: '/api/achievement/' + ctx.params.id,
     headers: {
       'X-Authorization': process.env.EVENT_RUNNER_API_KEY,
       'Content-Type': 'application/json'

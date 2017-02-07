@@ -6,8 +6,6 @@ import { LoginComponent } from './login';
 import { SignupComponent } from './signup';
 import { DashboardComponent } from './dashboard';
 import { ProfileComponent } from './profile';
-// import { EventEditModule } from './event-edit';
-import { EventsComponent } from './events';
 
 import { AuthGuard } from './guard/auth-guard.service';
 
@@ -29,6 +27,7 @@ export const ROUTES: Routes = [
   // { path: 'event-edit/:id', component: EventEditComponent, canActivate: [AuthGuard],
   //   resolve: { event: EventResolver } },
   { path: 'event-edit', loadChildren: './event-edit#EventEditModule', canActivate: [AuthGuard] },
-  { path: 'events', component: EventsComponent, canActivate: [AuthGuard] },
+  { path: 'events', loadChildren: './events#EventsModule', canActivate: [AuthGuard] },
+  { path: 'search', loadChildren: './+search#SearchModule', canActivate: [AuthGuard] },
   { path: '**',    component: NoContentComponent },
 ];

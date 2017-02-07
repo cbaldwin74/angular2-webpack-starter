@@ -49,9 +49,9 @@ import { ProfileComponent } from './profile';
 import { ProfileService } from './profile/profile.service';
 import { EqualValidator } from './directives/equal-validator.directive';
 import { EventService } from './models/event.service.ts';
-import { EventsComponent } from './events';
 import { AlertService } from './alerts';
 import { StageService } from './models/stage.service';
+import { AchievementService } from './models/achievement.service';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
@@ -72,6 +72,7 @@ const APP_PROVIDERS = [
   EventService,
   AlertService,
   StageService,
+  AchievementService,
 ];
 
 type StoreType = {
@@ -96,7 +97,6 @@ type StoreType = {
     DashboardComponent,
     ProfileComponent,
     EqualValidator,
-    EventsComponent,
   ],
   imports: [ // import Angular's modules
     BrowserModule,

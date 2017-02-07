@@ -1,1 +1,1 @@
-export * from './events.component';
+export { EventsModule } from './events.module';
