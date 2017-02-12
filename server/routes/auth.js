@@ -25,7 +25,7 @@ router.post('/signup',
   co.wrap(function*(ctx, next) {
     var userInfo = ctx.request.body;
     let encrypted = yield bcrypt.hash(userInfo.password, saltRounds);
-    var user = yield db.addUser(userInfo.firstname, userInfo.lastname, userInfo.email, encrypted);
+    var user = yield db.addUser(userInfo.firstname, userInfo.lastname, userInfo.email.toLowerCase(), encrypted);
     ctx.login(user, co.wrap(function*(err) {
       if (err) {
         return next(err);
