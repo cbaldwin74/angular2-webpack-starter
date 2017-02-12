@@ -32,13 +32,19 @@ passport.deserializeUser(function*(id, done) {
 passport.use(new LocalStrategy(co.wrap(function*(email, password, done) {
   let address = email.toLowerCase();
   let user = yield fetchUserByEmail(address);
-  let equal = yield bcrypt.compare(password, user.password);
 
-  if (address === user.email && equal) {
-    console.log('Good User');
-    done(null, user);
+  if (user) {
+    let equal = yield bcrypt.compare(password, user.password);
+
+    if (address === user.email && equal) {
+      console.log('Good User');
+      done(null, user);
+    } else {
+      console.log('Bad User');
+      done(null, false);
+    }
   } else {
-    console.log('Bad User');
+    console.log('user not found');
     done(null, false);
   }
 })));
