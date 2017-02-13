@@ -18,9 +18,11 @@ console.log(process.env.PORT);
 if (process.env.PORT) {
   var port = process.env.PORT;
 } else if (process.getuid() === 0) { // if we are root
-    var port = 443;
+  var port = 443;
+  // var port = 80;
 } else { // we are not root, can only use sockets >1024
-    var port = 8443;
+  var port = 8443;
+  // var port = 8085;
 }
 console.log(port);
 Promise.coroutine(function*() { // same as an async function; allows use of yield to await promises.
@@ -35,7 +37,8 @@ Promise.coroutine(function*() { // same as an async function; allows use of yiel
     };
 
     function getServer() {
-        const server = spdy.createServer(credentials, app.callback());
+      const server = spdy.createServer({ spdy: { plain: true } }, app.callback());
+      // const server = spdy.createServer(credentials, app.callback());
         const io = socketIo.listen(server);
 
         io.on('connection', function(socket) {
