@@ -69,7 +69,7 @@ router.post('/event', co.wrap(function*(ctx, next) {
     }
   };
 
-  // console.log('received', ctx.request.body);
+  console.log('received', ctx.request.body);
   yield sendRequest(options, ctx.request.body).then(function(result) {
       // console.log('then: ' + result);
 
