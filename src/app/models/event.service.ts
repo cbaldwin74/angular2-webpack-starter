@@ -24,7 +24,7 @@ export class EventService {
    */
   public saveEvent(event: EventModel): Promise<EventModel> {
     event.ownerId = this.auth.getUserId();
-
+console.log('saveEvent:', this.prepareEventObj(event));
     return this.http.post('/api/event', this.prepareEventObj(event))
         .toPromise()
         .then((response: Response): EventModel => {
