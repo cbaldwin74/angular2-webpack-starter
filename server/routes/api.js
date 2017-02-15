@@ -1,5 +1,6 @@
 const router = require('koa-router')();
 const http = require('http');
+const https = require('https');
 const co = require('bluebird-co');
 // const adapt = require('koa-adapter-bluebird'); // uses bluebird-co for performance
 // const co = require('co');
@@ -406,7 +407,7 @@ router.get('/achievement/:id', co.wrap(function*(ctx, next) {
 function sendRequest(options, data) {
   // console.log('sending request', options);
   return new Promise(function(resolve, reject) {
-    var req = http.request(options, (apiRes) => {
+    var req = https.request(options, (apiRes) => {
       var result = '';
       var status = apiRes.statusCode;
       console.log(`STATUS: ${apiRes.statusCode}`);
