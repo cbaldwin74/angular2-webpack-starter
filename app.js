@@ -15,6 +15,19 @@ const app = module.exports = new Koa();
 const html = require('html-template-tag');
 const convert = require('koa-convert');
 const session = require('koa-generic-session');
+
+if (process.env.REDISCLOUD_URL) {
+  var redisConfig = {
+    url: process.env.REDISCLOUD_URL
+  };
+} else {
+  var redisConfig = {
+    host: process.env.REDIS_HOST || '127.0.0.1',
+    post: process.env.REDIS_PORT || '6379'
+  };
+}
+
+const redisStore = require('koa-redis')(redisConfig);
 const passport = require('koa-passport');
 
 app.use(require('koa-response-time')());
