@@ -411,7 +411,7 @@ function sendRequest(options, data) {
       var status = apiRes.statusCode;
       console.log(`STATUS: ${apiRes.statusCode}`);
 
-      if ((status >= 200) && (status < 300))
+      if ((status >= 200) && (status < 300)) {
         // console.log(`HEADERS: ${JSON.stringify(apiRes.headers)}`);
         apiRes.setEncoding('utf8');
         apiRes.on('data', (chunk) => {
