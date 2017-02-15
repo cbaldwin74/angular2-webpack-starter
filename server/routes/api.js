@@ -408,7 +408,7 @@ function sendRequest(options, data) {
   return new Promise(function(resolve, reject) {
     var req = http.request(options, (apiRes) => {
       var result = '';
-      // console.log(`STATUS: ${apiRes.statusCode}`);
+      console.log(`STATUS: ${apiRes.statusCode}`);
       // console.log(`HEADERS: ${JSON.stringify(apiRes.headers)}`);
       apiRes.setEncoding('utf8');
       apiRes.on('data', (chunk) => {
