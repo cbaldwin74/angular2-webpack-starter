@@ -424,7 +424,7 @@ function sendRequest(options, data) {
             resolve(result);
         });
       } else {
-        reject(status);
+        reject(new Error('Request error: ' + status));
       }
     }).on('error', (e) => {
       console.log(`problem with request: ${e.message}`);
