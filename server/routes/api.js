@@ -61,7 +61,7 @@ router.get('/test', co.wrap(function*(ctx, next) {
 router.post('/event', co.wrap(function*(ctx, next) {
   var options = {
     hostname: process.env.EVENT_RUNNER_HOST,
-    port: 80,
+    port: 443,
     method: 'POST',
     path: '/api/event',
     headers: {
