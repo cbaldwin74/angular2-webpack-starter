@@ -408,18 +408,24 @@ function sendRequest(options, data) {
   return new Promise(function(resolve, reject) {
     var req = http.request(options, (apiRes) => {
       var result = '';
+      var status = apiRes.statusCode;
       console.log(`STATUS: ${apiRes.statusCode}`);
-      // console.log(`HEADERS: ${JSON.stringify(apiRes.headers)}`);
-      apiRes.setEncoding('utf8');
-      apiRes.on('data', (chunk) => {
-          // console.log(`BODY: ${chunk}`);
-          result += `${chunk}`;
-      });
-      apiRes.on('end', () => {
-          // console.log('No more data in response.');
 
-          resolve(result);
-      });
+      if ((status >= 200) && (status < 300))
+        // console.log(`HEADERS: ${JSON.stringify(apiRes.headers)}`);
+        apiRes.setEncoding('utf8');
+        apiRes.on('data', (chunk) => {
+            // console.log(`BODY: ${chunk}`);
+            result += `${chunk}`;
+        });
+        apiRes.on('end', () => {
+            // console.log('No more data in response.');
+
+            resolve(result);
+        });
+      } else {
+        reject(status);
+      }
     }).on('error', (e) => {
       console.log(`problem with request: ${e.message}`);
 
