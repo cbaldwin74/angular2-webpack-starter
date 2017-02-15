@@ -50,6 +50,7 @@ app.keys = ['some secret hurr'];
 //     maxAge: 24 * 60 * 60 * 1000 // One Day
 // }, app)));
 app.use(convert(session({
+    store: redisStore,
     maxAge: 24 * 60 * 60 * 1000 // One Day
 }, app)));
 
