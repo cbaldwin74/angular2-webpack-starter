@@ -410,9 +410,9 @@ function sendRequest(options, data) {
 
   if (data) {
     dataString = JSON.stringify(data);
-    options.headers['Content-Length'] = Buffer.byteLength(postData);
+    options.headers['Content-Length'] = Buffer.byteLength(dataString);
   }
-  
+
   console.log(JSON.stringify(options.headers));
 
   return new Promise(function(resolve, reject) {
