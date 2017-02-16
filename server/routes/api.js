@@ -434,6 +434,7 @@ function sendRequest(options, data) {
     });
 
     if (data) {
+      console.log('writing request data', JSON.stringify(data));
       req.write(JSON.stringify(data));
     }
     req.end();
