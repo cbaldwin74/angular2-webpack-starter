@@ -59,19 +59,8 @@ router.get('/test', co.wrap(function*(ctx, next) {
 // Events
 
 router.post('/event', co.wrap(function*(ctx, next) {
-  var options = {
-    hostname: process.env.EVENT_RUNNER_HOST,
-    port: 443,
-    method: 'POST',
-    path: '/api/event',
-    headers: {
-      'X-Authorization': process.env.EVENT_RUNNER_API_KEY,
-      'Content-Type': 'application/json'
-    }
-  };
-
-  console.log('received', ctx.request.body);
-  yield sendRequest(options, ctx.request.body).then(function(result) {
+  // console.log('received', ctx.request.body);
+  yield sendRequest('POST', '/api/event', ctx.request.body).then(function(result) {
       // console.log('then: ' + result);
 
       ctx.body = result;
@@ -83,19 +72,8 @@ router.post('/event', co.wrap(function*(ctx, next) {
 }));
 
 router.put('/event', co.wrap(function*(ctx, next) {
-  var options = {
-    hostname: process.env.EVENT_RUNNER_HOST,
-    port: 80,
-    method: 'PUT',
-    path: '/api/event',
-    headers: {
-      'X-Authorization': process.env.EVENT_RUNNER_API_KEY,
-      'Content-Type': 'application/json'
-    }
-  };
-
   // console.log('received', ctx.request.body);
-  yield sendRequest(options, ctx.request.body).then(function(result) {
+  yield sendRequest('PUT', '/api/event', ctx.request.body).then(function(result) {
       // console.log('then: ' + result);
 
       ctx.body = result;
@@ -107,17 +85,7 @@ router.put('/event', co.wrap(function*(ctx, next) {
 }));
 
 router.get('/events', co.wrap(function*(ctx, next) {
-  var options = {
-    hostname: process.env.EVENT_RUNNER_HOST,
-    method: 'GET',
-    path: '/api/events',
-    headers: {
-      'X-Authorization': process.env.EVENT_RUNNER_API_KEY,
-      'Content-Type': 'application/json'
-    }
-  };
-
-  yield sendRequest(options, null).then(function(result) {
+  yield sendRequest('GET', '/api/events', null).then(function(result) {
     console.log(result);
 
     ctx.body = result;
@@ -129,17 +97,8 @@ router.get('/events', co.wrap(function*(ctx, next) {
 }));
 
 router.get('/events/:ownerId', co.wrap(function*(ctx, next) {
-  var options = {
-    hostname: process.env.EVENT_RUNNER_HOST,
-    method: 'GET',
-    path: '/api/events/' + ctx.params.ownerId,
-    headers: {
-      'X-Authorization': process.env.EVENT_RUNNER_API_KEY,
-      'Content-Type': 'application/json'
-    }
-  };
-
-  yield sendRequest(options, null).then((result) => ctx.body = result)
+  yield sendRequest('GET', '/api/events/' + ctx.params.ownerId, null)
+  .then((result) => ctx.body = result)
   .catch(function(err) {
     console.log(err);
     throw err;
@@ -147,17 +106,8 @@ router.get('/events/:ownerId', co.wrap(function*(ctx, next) {
 }));
 
 router.get('/event/:id', co.wrap(function*(ctx, next) {
-  var options = {
-    hostname: process.env.EVENT_RUNNER_HOST,
-    method: 'GET',
-    path: '/api/event/' + ctx.params.id,
-    headers: {
-      'X-Authorization': process.env.EVENT_RUNNER_API_KEY,
-      'Content-Type': 'application/json'
-    }
-  };
-
-  yield sendRequest(options, null).then((result) => ctx.body = result)
+  yield sendRequest("GET", '/api/event/' + ctx.params.id, null)
+  .then((result) => ctx.body = result)
   .catch(function(err) {
     console.log(err);
     throw err;
@@ -165,19 +115,8 @@ router.get('/event/:id', co.wrap(function*(ctx, next) {
 }));
 
 router.post('/event/search', co.wrap(function*(ctx, next) {
-  var options = {
-    hostname: process.env.EVENT_RUNNER_HOST,
-    port: 80,
-    method: 'POST',
-    path: '/api/event/search',
-    headers: {
-      'X-Authorization': process.env.EVENT_RUNNER_API_KEY,
-      'Content-Type': 'application/json'
-    }
-  };
-
   // console.log('received', ctx.request.body);
-  yield sendRequest(options, ctx.request.body).then(function(result) {
+  yield sendRequest('POST', '/api/event/search', ctx.request.body).then(function(result) {
       // console.log('then: ' + result);
 
       ctx.body = result;
@@ -191,19 +130,8 @@ router.post('/event/search', co.wrap(function*(ctx, next) {
 // Stage
 
 router.post('/stage', co.wrap(function*(ctx, next) {
-  var options = {
-    hostname: process.env.EVENT_RUNNER_HOST,
-    port: 80,
-    method: 'POST',
-    path: '/api/stage',
-    headers: {
-      'X-Authorization': process.env.EVENT_RUNNER_API_KEY,
-      'Content-Type': 'application/json'
-    }
-  };
-
   // console.log('received', ctx.request.body);
-  yield sendRequest(options, ctx.request.body).then(function(result) {
+  yield sendRequest('POST', '/api/stage', ctx.request.body).then(function(result) {
       // console.log('then: ' + result);
 
       ctx.body = result;
@@ -215,19 +143,8 @@ router.post('/stage', co.wrap(function*(ctx, next) {
 }));
 
 router.put('/stage', co.wrap(function*(ctx, next) {
-  var options = {
-    hostname: process.env.EVENT_RUNNER_HOST,
-    port: 80,
-    method: 'PUT',
-    path: '/api/stage',
-    headers: {
-      'X-Authorization': process.env.EVENT_RUNNER_API_KEY,
-      'Content-Type': 'application/json'
-    }
-  };
-
   // console.log('received', ctx.request.body);
-  yield sendRequest(options, ctx.request.body).then(function(result) {
+  yield sendRequest('PUT', '/api/stage', ctx.request.body).then(function(result) {
       // console.log('then: ' + result);
 
       ctx.body = result;
@@ -239,17 +156,7 @@ router.put('/stage', co.wrap(function*(ctx, next) {
 }));
 
 router.get('/stages', co.wrap(function*(ctx, next) {
-  var options = {
-    hostname: process.env.EVENT_RUNNER_HOST,
-    method: 'GET',
-    path: '/api/stages',
-    headers: {
-      'X-Authorization': process.env.EVENT_RUNNER_API_KEY,
-      'Content-Type': 'application/json'
-    }
-  };
-
-  yield sendRequest(options, null).then(function(result) {
+  yield sendRequest('GET', '/api/stages', null).then(function(result) {
     console.log(result);
 
     ctx.body = result;
@@ -261,17 +168,8 @@ router.get('/stages', co.wrap(function*(ctx, next) {
 }));
 
 router.get('/stages/:ownerId', co.wrap(function*(ctx, next) {
-  var options = {
-    hostname: process.env.EVENT_RUNNER_HOST,
-    method: 'GET',
-    path: '/api/stages/' + ctx.params.ownerId,
-    headers: {
-      'X-Authorization': process.env.EVENT_RUNNER_API_KEY,
-      'Content-Type': 'application/json'
-    }
-  };
-
-  yield sendRequest(options, null).then((result) => ctx.body = result)
+  yield sendRequest('GET', '/api/stages/' + ctx.params.ownerId, null)
+  .then((result) => ctx.body = result)
   .catch(function(err) {
     console.log(err);
     throw err;
@@ -279,17 +177,8 @@ router.get('/stages/:ownerId', co.wrap(function*(ctx, next) {
 }));
 
 router.get('/stage/:id', co.wrap(function*(ctx, next) {
-  var options = {
-    hostname: process.env.EVENT_RUNNER_HOST,
-    method: 'GET',
-    path: '/api/stage/' + ctx.params.id,
-    headers: {
-      'X-Authorization': process.env.EVENT_RUNNER_API_KEY,
-      'Content-Type': 'application/json'
-    }
-  };
-
-  yield sendRequest(options, null).then((result) => ctx.body = result)
+  yield sendRequest('GET', '/api/stage/' + ctx.params.id, null)
+  .then((result) => ctx.body = result)
   .catch(function(err) {
     console.log(err);
     throw err;
@@ -299,19 +188,8 @@ router.get('/stage/:id', co.wrap(function*(ctx, next) {
 // Achievement
 
 router.post('/achievement', co.wrap(function*(ctx, next) {
-  var options = {
-    hostname: process.env.EVENT_RUNNER_HOST,
-    port: 80,
-    method: 'POST',
-    path: '/api/achievement',
-    headers: {
-      'X-Authorization': process.env.EVENT_RUNNER_API_KEY,
-      'Content-Type': 'application/json'
-    }
-  };
-
   // console.log('received', ctx.request.body);
-  yield sendRequest(options, ctx.request.body).then(function(result) {
+  yield sendRequest('POST', '/api/achievement', ctx.request.body).then(function(result) {
       // console.log('then: ' + result);
 
       ctx.body = result;
@@ -322,20 +200,9 @@ router.post('/achievement', co.wrap(function*(ctx, next) {
   });
 }));
 
-router.put('/achievementachievement', co.wrap(function*(ctx, next) {
-  var options = {
-    hostname: process.env.EVENT_RUNNER_HOST,
-    port: 80,
-    method: 'PUT',
-    path: '/api/achievement',
-    headers: {
-      'X-Authorization': process.env.EVENT_RUNNER_API_KEY,
-      'Content-Type': 'application/json'
-    }
-  };
-
+router.put('/achievement', co.wrap(function*(ctx, next) {
   // console.log('received', ctx.request.body);
-  yield sendRequest(options, ctx.request.body).then(function(result) {
+  yield sendRequest('PUT', '/api/achievement', ctx.request.body).then(function(result) {
       // console.log('then: ' + result);
 
       ctx.body = result;
@@ -347,17 +214,7 @@ router.put('/achievementachievement', co.wrap(function*(ctx, next) {
 }));
 
 router.get('/achievements', co.wrap(function*(ctx, next) {
-  var options = {
-    hostname: process.env.EVENT_RUNNER_HOST,
-    method: 'GET',
-    path: '/api/achievements',
-    headers: {
-      'X-Authorization': process.env.EVENT_RUNNER_API_KEY,
-      'Content-Type': 'application/json'
-    }
-  };
-
-  yield sendRequest(options, null).then(function(result) {
+  yield sendRequest('GET', '/api/achievements', null).then(function(result) {
     console.log(result);
 
     ctx.body = result;
@@ -369,17 +226,8 @@ router.get('/achievements', co.wrap(function*(ctx, next) {
 }));
 
 router.get('/achievements/:eventId', co.wrap(function*(ctx, next) {
-  var options = {
-    hostname: process.env.EVENT_RUNNER_HOST,
-    method: 'GET',
-    path: '/api/achievements/' + ctx.params.eventId,
-    headers: {
-      'X-Authorization': process.env.EVENT_RUNNER_API_KEY,
-      'Content-Type': 'application/json'
-    }
-  };
-
-  yield sendRequest(options, null).then((result) => ctx.body = result)
+  yield sendRequest('GET', '/api/achievements/' + ctx.params.eventId, null)
+  .then((result) => ctx.body = result)
   .catch(function(err) {
     console.log(err);
     throw err;
@@ -387,33 +235,31 @@ router.get('/achievements/:eventId', co.wrap(function*(ctx, next) {
 }));
 
 router.get('/achievement/:id', co.wrap(function*(ctx, next) {
-  var options = {
-    hostname: process.env.EVENT_RUNNER_HOST,
-    method: 'GET',
-    path: '/api/achievement/' + ctx.params.id,
-    headers: {
-      'X-Authorization': process.env.EVENT_RUNNER_API_KEY,
-      'Content-Type': 'application/json'
-    }
-  };
-
-  yield sendRequest(options, null).then((result) => ctx.body = result)
+  yield sendRequest('GET', '/api/achievement/' + ctx.params.id, null)
+  .then((result) => ctx.body = result)
   .catch(function(err) {
     console.log(err);
     throw err;
   });
 }));
 
-function sendRequest(options, data) {
+function sendRequest(method, path, data) {
   // console.log('sending request', options);
   let dataString = null;
+  let options = {
+    hostname: process.env.EVENT_RUNNER_HOST,
+    method: method,
+    path: path,
+    headers: {
+      'X-Authorization': process.env.EVENT_RUNNER_API_KEY,
+      'Content-Type': 'application/json'
+    }
+  };
 
   if (data) {
     dataString = JSON.stringify(data);
     options.headers['Content-Length'] = Buffer.byteLength(dataString);
   }
-
-  console.log(JSON.stringify(options.headers));
 
   return new Promise(function(resolve, reject) {
     var req = https.request(options, (apiRes) => {
@@ -442,9 +288,8 @@ function sendRequest(options, data) {
       reject(e);
     });
 
-    if (data) {
-      console.log('writing request data', JSON.stringify(data));
-      req.write(JSON.stringify(data));
+    if (dataString) {
+      req.write(dataString);
     }
     req.end();
   });
