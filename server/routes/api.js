@@ -406,6 +406,15 @@ router.get('/achievement/:id', co.wrap(function*(ctx, next) {
 
 function sendRequest(options, data) {
   // console.log('sending request', options);
+  let dataString = null;
+
+  if (data) {
+    dataString = JSON.stringify(data);
+    options.headers['Content-Length'] = Buffer.byteLength(postData);
+  }
+  
+  console.log(JSON.stringify(options.headers));
+
   return new Promise(function(resolve, reject) {
     var req = https.request(options, (apiRes) => {
       var result = '';
